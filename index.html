@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f1d339" />
+  <meta name="theme-color" content="#003B49" />
   <meta name="description" content="Spatial Catalog — una publicación digital sobre cómo el espacio se convierte en comercio. Prototipo editorial interactivo, Issue 001." />
   <title>SPATIAL CATALOG / ISSUE 001</title>
   <style>
@@ -74,6 +74,87 @@ html,body,#magazine{width:100%;max-width:100%;overflow-x:clip}
 }
 @media (prefers-reduced-motion:reduce) {
  .room-editorial{transform:none!important;opacity:1!important}
+}
+
+
+/* ISSUE 001 — familias cromaticas v3 */
+:root {
+ --paper:#F2EEE6;--ink:#121212;--muted:#4E4B48;
+ --yellow:#D7FF00;--coral:#C9331E;--blue:#63A8CC;--mint:#8FB091;
+ --poseidon:#003B49;--norse:#63A8CC;--pumpkin:#C9331E;--cream:#ECE8DE;
+ --amazon:#006B2D;--raspberry:#E10D78;--sage:#8FB091;--soil:#5A382B;
+ --tomato:#F00000;--wine:#5A1230;--mustard:#9A840D;--butter:#E9E0D0;
+ --pigeon:#999991;--blossom:#E4B4C9;--acid:#D7FF00;
+}
+body{background:var(--paper);color:var(--ink)}
+button:focus-visible,a:focus-visible{outline-color:var(--acid)}
+::selection{background:var(--norse);color:var(--poseidon)}
+/* Cover: deep teal, blue, burnt orange */
+.cover,.cover-stage{background:var(--poseidon)}
+.cover-title,.cover-issue,.cover-footer,.cover-scroll{color:var(--cream)}
+.cover-photo{background:#7898a5}
+.cover-colorblock{background:var(--pumpkin)}
+.cover-big-numeral{color:var(--norse);opacity:.13}
+.cover-side-copy{color:var(--norse)}
+.cover-side-copy strong,.cover-footer b,.cover-scroll span{color:var(--cream)}
+/* Index: wine on buttercream / acid interaction */
+.contents,.contents-stage{background:var(--paper)}
+.index-rail{background:var(--butter)}
+.index-rail h2{color:var(--wine)}
+.index-number{color:var(--poseidon);opacity:.08}
+.index-row span{color:var(--pumpkin)}
+.index-row:hover{background:var(--acid)}
+/* Manifesto: raspberry, cream, acid */
+.manifesto,.manifesto-stage{background:var(--raspberry);color:var(--cream)}
+.manifesto .section-kicker,.manifesto .section-page,.manifesto-bottom p,.manifesto-headline{color:var(--cream)}
+.manifesto-symbol{color:var(--acid)}
+.manifesto-bottom{border-top-color:var(--cream)}
+/* Living: wine, mustard, buttercream */
+.room-editorial-living{background:var(--wine);color:var(--cream)}
+.room-living .room-ed-top,.room-living .room-copy-secondary{border-top-color:var(--butter)}
+.room-living .room-ed-top,.room-living .room-overline,.room-living .room-copy-primary h2,.room-living .room-ed-num{color:var(--butter)}
+.room-living .room-copy-primary p,.room-living .room-copy-secondary p{color:rgba(236,232,222,.92)}
+.room-living .room-tint{background:linear-gradient(90deg,rgba(90,18,48,.53),transparent 48%),linear-gradient(0deg,rgba(0,0,0,.28),transparent 46%,rgba(0,0,0,.20) 100%)}
+/* First interlude: cream, forest and raspberry */
+.interlude-coral .interlude-stage{background:var(--cream);color:var(--raspberry)}
+.interlude-coral .interlude-lead{color:var(--amazon)}
+.interlude-coral .section-kicker{color:var(--ink)}
+.interlude-coral .interlude-number{color:var(--raspberry);opacity:.12}
+/* Bedroom: blossom, pigeon, lime */
+.room-editorial-bedroom{background:var(--blossom);color:var(--ink)}
+.room-bedroom .room-ed-top,.room-bedroom .room-copy-secondary{border-top-color:var(--ink)}
+.room-bedroom .room-overline,.room-bedroom .room-ed-num{color:#55504d}
+.room-bedroom .room-tint{background:linear-gradient(270deg,rgba(153,153,145,.28),transparent 45%),linear-gradient(0deg,rgba(0,0,0,.22),transparent 48%,rgba(0,0,0,.16) 100%)}
+/* Second interlude: petroleum blue, sky blue and pumpkin */
+.interlude-blue .interlude-stage{background:var(--poseidon);color:var(--norse)}
+.interlude-blue .section-kicker,.interlude-blue .interlude-lead{color:var(--cream)}
+.interlude-blue .interlude-number{color:var(--pumpkin);opacity:.16}
+/* Dining: sage, soil, tomato */
+.room-editorial-dining{background:var(--sage);color:var(--soil)}
+.room-dining .room-ed-top,.room-dining .room-copy-secondary{border-top-color:var(--soil)}
+.room-dining .room-ed-top,.room-dining .room-overline,.room-dining .room-copy-primary h2,.room-dining .room-ed-num{color:var(--soil)}
+.room-dining .room-copy-primary p,.room-dining .room-copy-secondary p{color:#3d2a20}
+.room-dining .room-tint{background:linear-gradient(90deg,rgba(90,56,43,.36),transparent 44%),linear-gradient(0deg,rgba(0,0,0,.22),transparent 48%,rgba(0,0,0,.16) 100%)}
+/* Closing: acid lime, deep teal, orange */
+.closing,.closing-stage{background:var(--acid);color:var(--poseidon)}
+.closing-typography,.closing-bottom,.closing-bottom p,.closing-bottom a,.closing-foot,.closing .section-kicker{color:var(--poseidon)}
+.closing-bottom,.closing-foot{border-color:var(--poseidon)}
+.closing-bottom a{border-bottom-color:var(--poseidon)}
+.closing-period{color:var(--pumpkin)}
+/* Interactions and product detail */
+.price-tag:hover{background:transparent;color:var(--acid)}
+.product-sheet{background:var(--paper)}
+.product-sheet-header{background:var(--blossom)}
+.product-sheet-main #product-price{color:var(--pumpkin)}
+.product-sheet-footer{background:var(--poseidon);color:var(--cream)}
+.product-sheet-footer button{color:var(--cream);border-bottom-color:var(--cream)}
+/* Portrait phone rotates in the same editorial family */
+@media(max-width:950px) and (orientation:portrait){
+ .rotate-screen{background:var(--poseidon);color:var(--cream)}
+ .rot-rule{border-top-color:var(--cream)}
+ .rot-phone{border-color:var(--cream)}
+ .rot-phone:after{background:var(--cream)}
+ .rot-phone-inner{background:var(--pumpkin)}
 }
 
 </style>
