@@ -23,4 +23,8 @@ Each scene owns independent named nested GSAP timelines. Character entrances hav
 
 ## Deployment
 
-The GitHub Actions workflow builds and uploads `out`, then deploys with the Pages environment. Public URL and workflow outcome are verified separately after uploading this source commit.
+The first production workflow built successfully and uploaded `out`: https://github.com/inmersoxr/Catalogo_espacial/actions/runs/39878956884.
+
+Deployment stopped at the initial Pages activation: `Create Pages site failed. Resource not accessible by integration`. The repository owner needs to select **GitHub Actions** in Settings → Pages → Build and deployment → Source. The connected GitHub tools support source commits but do not expose Pages administration; the workflow token cannot create the site.
+
+The public URL returned HTTP 404 at this stage. Public deployment is **not yet verified**. Once Pages is enabled, rerun the failed deploy job, then check the live page, local images/fonts, navigation and scroll animations.
