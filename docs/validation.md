@@ -21,10 +21,12 @@ Visual corrections during inspection: explicit initial opacity for delayed neste
 
 Each scene owns independent named nested GSAP timelines. Character entrances have staggered transform, rotation, scale and opacity. The secondary phrases begin while outgoing primary letters are still departing. Body copy, media masks and product layers have separate cues. The `CameraTimeline` sends normalized narrative progress to `SpatialScenePlaceholder` only; there is no 3D renderer.
 
-## Deployment
+## Deployment — verified 2026-10-23
 
-The first production workflow built successfully and uploaded `out`: https://github.com/inmersoxr/Catalogo_espacial/actions/runs/39878956884.
+Published at https://inmersoxr.github.io/Catalogo_espacial/.
 
-Deployment stopped at the initial Pages activation: `Create Pages site failed. Resource not accessible by integration`. The repository owner needs to select **GitHub Actions** in Settings → Pages → Build and deployment → Source. The connected GitHub tools support source commits but do not expose Pages administration; the workflow token cannot create the site.
+GitHub Actions run https://github.com/inmersoxr/Catalogo_espacial/actions/runs/39878956884 completed successfully on its second attempt after the owner enabled Pages. Both the build and deploy jobs passed. The deployed application is commit `53147e4390e3570dda19519318a9c6b6fbad39fa`; subsequent documentation commits do not change the application.
 
-The public URL returned HTTP 404 at this stage. Public deployment is **not yet verified**. Once Pages is enabled, rerun the failed deploy job, then check the live page, local images/fonts, navigation and scroll animations.
+The live URL returns HTTP 200 with system TLS verification enabled. Browser checks run against the published HTML, JavaScript, CSS, fonts and images. Chromium in this execution environment does not inherit the session proxy CA, so the test browser receives live HTTPS responses through Playwright's TLS-validating request client. No persistent browser trust changes or disabled TLS checks were used.
+
+Live validation: desktop (1440 × 900), landscape phone (844 × 390), portrait gate and reduced motion. All nine scenes, chapter navigation, reversible scroll, product selection/details, loaded images and console errors are checked. Font loading and copying a product reference are checked separately. Screenshots are visually reviewed.
