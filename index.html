@@ -269,6 +269,39 @@ button:focus-visible,a:focus-visible{outline-color:var(--acid)}
 }
 
 
+
+/* COVER FULL BLEED — photograph is the entire viewport, never an inset panel.
+   Important: cover-photo also has image-box, whose position:relative previously overrode
+   position:absolute. This selector explicitly resolves that cascade. */
+#cover .cover-stage { position:sticky; height:100dvh; min-height:100svh; overflow:hidden; }
+#cover .cover-photo.image-box {
+  position:absolute; inset:0; top:0; right:0; bottom:0; left:0;
+  width:100%; height:100%; margin:0; padding:0; border:0;
+  z-index:0; overflow:hidden; background:var(--poseidon);
+}
+#cover .cover-photo img {
+  display:block; width:100%; height:100%; object-fit:cover;
+  object-position:center center; border:0;
+}
+#cover .cover-photo:after {
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,24,33,.55) 0%,rgba(0,24,33,.15) 39%,rgba(0,24,33,.13) 56%,rgba(0,24,33,.70) 100%);
+}
+#cover .cover-colorblock { display:none; }
+#cover .cover-title { text-shadow:0 3px 26px rgba(0,15,20,.32); }
+#cover .cover-issue,#cover .cover-footer { text-shadow:0 2px 16px rgba(0,15,20,.5); }
+#cover .cover-side-copy { text-shadow:0 2px 14px rgba(0,15,20,.65); }
+@media (max-width:950px) and (orientation:portrait) {
+  #cover .cover-photo.image-box { position:absolute;inset:0; width:100%;height:100%; }
+  #cover .cover-photo img {object-position:52% center;}
+  #cover .cover-photo:after {
+    background:linear-gradient(180deg,rgba(0,24,33,.68) 0%,rgba(0,24,33,.38) 32%,rgba(0,24,33,.04) 55%,rgba(0,24,33,.68) 100%);
+  }
+  #cover .cover-title {top:19%;z-index:5;}
+  #cover .cover-side-copy {top:62%;z-index:4;}
+  #cover .cover-footer {bottom:4%;z-index:6;}
+}
+
 </style>
 </head>
 <body>
