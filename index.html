@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f1d339" />
+  <meta name="description" content="Spatial Catalog — una publicación digital sobre cómo el espacio se convierte en comercio. Prototipo editorial interactivo, Issue 001." />
+  <title>SPATIAL CATALOG / ISSUE 001</title>
+  <style>
+:root{--yellow:#f1d339;--paper:#f3f0e8;--coral:#f25a49;--blue:#6a95d4;--mint:#9bbba3;--ink:#151515;--muted:#5c5b58;--pad:clamp(18px,2.25vw,42px);--font:'Inter','Helvetica Neue',Arial,sans-serif;--display:'Inter Display','Arial Black',Arial,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-color:#171717 var(--paper);scrollbar-width:thin}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+button,a{font:inherit}a{color:inherit;text-decoration:none}button{cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:5px}::selection{background:var(--blue);color:#fff}
+.site-header{height:64px;position:fixed;left:0;top:0;right:0;padding:0 var(--pad);z-index:100;display:grid;grid-template-columns:1.5fr 2fr auto 86px;gap:clamp(14px,3vw,52px);align-items:center;color:#fff;mix-blend-mode:difference;font-weight:800;font-size:10px;letter-spacing:.065em;line-height:1;pointer-events:none}
+.site-header a{pointer-events:auto}.brand{font-family:var(--display);font-size:20px;letter-spacing:-.07em;display:inline-flex;gap:2px;align-items:baseline;white-space:nowrap}.brand-dot{font-size:9px;transform:translateY(-4px);margin-right:6px}.brand small{font-family:var(--font);font-weight:700;font-size:9px;letter-spacing:.075em;margin-left:8px}
+.header-middle{display:flex;align-items:center;gap:20px}.header-middle span{white-space:nowrap}.header-progress{height:1px;flex:1;background:#777;position:relative;min-width:50px}.header-progress i{position:absolute;display:block;left:0;top:-1px;height:3px;width:0;background:#fff;transition:width .08s linear}.header-nav{display:flex;gap:24px}.header-nav a{transition:opacity .2s}.header-nav a:hover{opacity:.5}.header-num{text-align:right;white-space:nowrap}
+.story-section{position:relative;height:230svh}.sticky-stage{position:sticky;inset:0 0 auto;height:100svh;width:100%;overflow:hidden;isolation:isolate}.section-kicker{display:flex;justify-content:space-between;position:absolute;top:86px;left:var(--pad);right:var(--pad);z-index:6;text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:.075em}.section-kicker.light{color:#fff}
+/* Letter motion is frame-driven in script.js, not block opacity. */
+[data-kinetic]{visibility:visible}.k-word{display:inline-block;white-space:nowrap}.k-sp{display:inline-block;width:.22em}.k-char-wrap{display:inline-flex;perspective:800px;vertical-align:baseline;overflow:hidden}.k-char{display:inline-block;transform-origin:center 68%;transform-style:preserve-3d;will-change:transform,opacity;backface-visibility:hidden}
+/* COVER */
+.cover{height:290svh;background:var(--yellow)}.cover-stage{background:var(--yellow)}.cover-issue{position:absolute;top:91px;left:var(--pad);right:var(--pad);display:flex;justify-content:space-between;font-size:11px;font-weight:800;letter-spacing:.08em;z-index:6}.cover-photo{position:absolute;left:43.5%;top:18.5%;right:4%;bottom:14%;z-index:1;overflow:hidden;background:#c6bc96}.cover-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(0,0,0,.13),transparent 55%);pointer-events:none}.image-box{position:relative}.image-box img{width:100%;height:100%;object-fit:cover;display:block;will-change:transform;object-position:center center}
+.cover-colorblock{position:absolute;left:36.2%;bottom:14%;width:7.3%;height:27%;background:var(--coral);z-index:2}.cover-side-copy{position:absolute;right:5%;top:26%;color:#fff;z-index:4;text-align:right;font-size:clamp(12px,1.05vw,18px);font-weight:700;line-height:1.2;text-shadow:0 2px 8px #2229}
+.cover-title{z-index:5;position:absolute;left:calc(var(--pad) - 5px);top:32%;width:96%;font-family:var(--display);font-weight:900;letter-spacing:-.084em;font-size:clamp(84px,13.7vw,290px);line-height:.84;white-space:nowrap;pointer-events:none}.cover-title-row{height:1em}.cover-title-row.indent{margin-left:5.8%}.cover-footer{position:absolute;left:var(--pad);right:var(--pad);bottom:5.8%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;z-index:6;align-items:end;font-size:clamp(10px,.94vw,15px);line-height:1.27}.cover-footer b{font-family:var(--display);font-size:clamp(15px,1.52vw,25px);line-height:1.08}.cover-scroll{text-align:right;font-size:10px;font-weight:900;letter-spacing:.1em}.cover-scroll span{font-size:20px;margin-left:12px}.cover-big-numeral{position:absolute;z-index:2;right:1%;bottom:-12%;color:#111;font-family:var(--display);font-size:40vw;opacity:.07;pointer-events:none}
+/* CONTENTS */
+.contents{height:240svh;background:var(--paper)}.contents-stage{display:grid;grid-template-columns:39% 61%;background:var(--paper)}.index-rail{position:relative;background:var(--yellow);padding:90px var(--pad) var(--pad);display:flex;flex-direction:column;overflow:hidden}.tiny-marker{font-weight:900;font-size:11px;letter-spacing:.08em;line-height:1.5}.index-rail h2{font-family:var(--display);font-size:clamp(66px,7.7vw,150px);letter-spacing:-.09em;line-height:.88;margin:auto 0;max-width:100%}.index-rail>p{font-weight:700;line-height:1.3;letter-spacing:-.025em;font-size:clamp(13px,1.3vw,20px);margin:0}.index-number{position:absolute;right:2%;bottom:-13%;font:900 30vw var(--display);letter-spacing:-.12em;opacity:.08}.index-body{padding:105px var(--pad) 42px clamp(34px,4vw,74px);display:flex;flex-direction:column}.index-topline{display:flex;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:22px;font-size:10px;font-weight:800;letter-spacing:.07em}.index-row{display:grid;grid-template-columns:8% 1fr 24%;align-items:center;gap:12px;min-height:15.4%;border-bottom:1px solid #1a1a1a80;transition:padding .2s,background .2s}.index-row span{font:900 13px var(--display);color:var(--coral)}.index-row strong{font-family:var(--display);font-size:clamp(25px,3.3vw,63px);letter-spacing:-.056em;line-height:1}.index-row i{font-style:normal;text-align:right;font-weight:700;font-size:10px;letter-spacing:.02em}.index-row:hover{padding:0 16px;background:var(--yellow)}.index-bottom{margin-top:auto;display:flex;justify-content:space-between;font-size:clamp(10px,1.1vw,15px);font-weight:800;line-height:1.2}
+/* MANIFESTO */
+.manifesto{height:270svh;background:var(--blue)}.manifesto-stage{background:var(--blue);color:#fff}.manifesto-headline{position:absolute;left:var(--pad);right:var(--pad);top:27%;font:900 clamp(69px,12.5vw,240px)/.88 var(--display);letter-spacing:-.08em;white-space:nowrap}.manifesto-headline>div:nth-child(2){padding-left:13.5%}.manifesto-headline>div:nth-child(3){padding-left:3.8%}.manifesto-bottom{position:absolute;bottom:6%;left:var(--pad);right:var(--pad);display:grid;grid-template-columns:.7fr 1.8fr auto;gap:30px;align-items:end;border-top:2px solid #fff;padding-top:22px}.manifesto-symbol{font:900 9vw/1 var(--display)}.manifesto-bottom p{font-size:clamp(14px,1.55vw,25px);font-weight:600;max-width:670px;line-height:1.24;letter-spacing:-.03em;margin:0}.section-page{font-size:11px;font-weight:800}
+/* ROOMS */
+.room{height:410svh}.room-stage{display:grid;grid-template-columns:34% 66%;background:var(--paper)}.room-stage-reverse{grid-template-columns:66% 34%}.room-editorial{position:relative;padding:87px var(--pad) 28px;display:flex;flex-direction:column;overflow:hidden;color:var(--ink)}.room-editorial-living{background:var(--paper)}.room-editorial-bedroom{background:var(--mint)}.room-editorial-dining{background:var(--yellow)}.room-ed-top{display:flex;justify-content:space-between;gap:10px;font-size:10px;font-weight:900;letter-spacing:.055em;border-top:2px solid var(--ink);padding-top:14px}.room-copy-primary{margin:auto 0 14%;position:relative;z-index:1}.room-overline{font-size:clamp(9px,.9vw,13px);font-weight:800;letter-spacing:.065em;margin-bottom:24px}.room-copy-primary h2{font:900 clamp(60px,7.0vw,136px)/.83 var(--display);letter-spacing:-.095em;margin:0 0 25px -5px;white-space:nowrap}.room-copy-primary p{max-width:400px;font-size:clamp(13px,1.26vw,21px);font-weight:600;letter-spacing:-.025em;line-height:1.25;margin:0}.room-copy-secondary{position:relative;display:grid;grid-template-columns:1fr auto;gap:20px;border-top:2px solid var(--ink);padding-top:16px}.room-copy-secondary p{max-width:320px;font-size:clamp(11px,.95vw,15px);line-height:1.35;margin:0}.room-ed-num{font-family:var(--display);font-size:clamp(18px,2vw,30px);letter-spacing:-.04em}
+.room-visual{position:relative;overflow:hidden;background:#c5c2b4;color:#fff}.room-image{position:absolute;inset:0;background:#d3c5aa}.room-image img{transform:scale(1.015);object-position:50% 50%;filter:saturate(.95) contrast(1.04)}.room-tint{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(15,15,15,.30),transparent 22%,transparent 58%,rgba(0,0,0,.30) 100%)}.room-visual-caption{position:absolute;top:88px;left:28px;right:28px;display:flex;justify-content:space-between;z-index:3;font-size:10px;font-weight:900;letter-spacing:.08em;text-shadow:0 1px 6px #0008}.room-corner-index{position:absolute;right:27px;bottom:19px;font-weight:900;font-size:10px;letter-spacing:.08em;text-shadow:0 1px 6px #0008}.room-floating{opacity:0;position:absolute;top:29%;left:7%;right:3%;z-index:4;pointer-events:none;will-change:transform,opacity}.room-floating span{font-size:clamp(10px,1vw,15px);font-weight:900;letter-spacing:.08em;display:block;margin-bottom:12px}.room-floating strong{font:900 clamp(54px,8.2vw,155px)/.84 var(--display);letter-spacing:-.075em;display:block;text-shadow:0 2px 40px #0003}.price-tag{opacity:0;position:absolute;z-index:10;display:flex;flex-direction:column;align-items:flex-start;gap:3px;background:var(--yellow);border:0;padding:12px 14px 10px;color:var(--ink);min-width:clamp(108px,12.8vw,245px);box-shadow:6px 6px 0 rgba(0,0,0,.12);text-align:left;will-change:transform,opacity;transition:background .15s}.price-tag:hover{background:#fff}.price-tag small{font-size:clamp(9px,.8vw,12px);font-weight:900;letter-spacing:.03em}.price-tag strong{font:900 clamp(30px,4.3vw,78px)/.9 var(--display);letter-spacing:-.07em}.price-tag span{font-size:9px;font-weight:900;align-self:flex-end;margin-top:7px;letter-spacing:.045em}.price-living-1{left:12%;bottom:23%}.price-living-2{right:7%;top:25%}.price-living-3{right:25%;bottom:11%}.price-bedroom-1{left:10%;bottom:20%}.price-bedroom-2{right:9%;top:34%}.price-dining-1{left:16%;bottom:14%}.price-dining-2{right:7%;top:34%}.price-dining-3{left:35%;top:15%}
+/* INTERLUDES */
+.interlude{height:255svh}.interlude-stage{padding:0 var(--pad);display:flex;flex-direction:column}.interlude-coral .interlude-stage{background:var(--coral);color:var(--ink)}.interlude-blue .interlude-stage{background:#2856bd;color:#fff}.interlude-big{position:absolute;top:28%;left:var(--pad);right:var(--pad);font:900 clamp(67px,11.5vw,220px)/.88 var(--display);letter-spacing:-.08em;white-space:nowrap}.interlude-big>div:nth-child(2){padding-left:12%}.interlude-big>div:nth-child(3){padding-left:28%}.interlude-blue .interlude-big>div:nth-child(2){padding-left:23%}.interlude-blue .interlude-big>div:nth-child(3){padding-left:44%}.interlude-lead{position:absolute;right:var(--pad);bottom:6%;max-width:min(45%,660px);font-size:clamp(14px,1.8vw,28px);font-weight:600;line-height:1.2;letter-spacing:-.02em}.interlude-number{position:absolute;bottom:-8%;left:var(--pad);font:900 22vw var(--display);opacity:.1}
+/* CLOSING */
+.closing{height:285svh}.closing-stage{background:var(--yellow);color:var(--ink)}.closing-typography{position:absolute;left:var(--pad);right:var(--pad);top:24%;font:900 clamp(65px,11.75vw,230px)/.89 var(--display);letter-spacing:-.082em;white-space:nowrap}.closing-typography>div:nth-child(2){padding-left:7%}.closing-typography>div:nth-child(3){padding-left:1%}.closing-period{color:var(--coral)}.closing-bottom{position:absolute;left:var(--pad);right:var(--pad);bottom:15%;display:grid;grid-template-columns:1.1fr 1.25fr .8fr;gap:3vw;border-top:2px solid var(--ink);padding-top:18px;align-items:start;font-size:clamp(11px,1.25vw,20px);font-weight:800;line-height:1.24}.closing-bottom p{margin:0;font-weight:600}.closing-bottom a{justify-self:end;border-bottom:2px solid var(--ink);padding-bottom:9px;white-space:nowrap}.closing-bottom a span{margin-left:24px}.closing-foot{position:absolute;left:var(--pad);right:var(--pad);bottom:4.5%;display:flex;justify-content:space-between;font-size:10px;font-weight:800;letter-spacing:.06em}
+/* PRODUCT SHEET */
+.product-scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:140}.product-sheet{position:fixed;right:0;top:0;height:100svh;width:min(560px,48vw);z-index:141;background:var(--paper);color:var(--ink);display:flex;flex-direction:column;transform:translateX(103%);transition:transform .55s cubic-bezier(.16,1,.3,1);box-shadow:-14px 0 45px #0002}.product-sheet.is-open{transform:translateX(0)}.product-sheet-header{padding:29px 26px;border-bottom:2px solid #111;display:flex;justify-content:space-between;font-size:11px;font-weight:900;letter-spacing:.06em}.product-sheet-header button{font-size:24px;border:0;background:none;padding:0;line-height:1}.product-sheet-main{padding:35px 26px;flex:1;display:flex;flex-direction:column}.product-sheet-main>span{font-weight:900;font-size:12px}.product-sheet-main h2{font:900 clamp(45px,5vw,85px)/.85 var(--display);letter-spacing:-.08em;margin:28px 0}.product-sheet-main p{font-size:clamp(15px,1.5vw,22px);line-height:1.32;max-width:410px;margin:0}.product-sheet-main #product-price{font:900 clamp(75px,8vw,145px)/1 var(--display);letter-spacing:-.08em;margin:auto 0 25px}.product-specs{border-top:2px solid var(--ink);padding-top:13px;display:flex;justify-content:space-between;font-size:10px;font-weight:900}.product-sheet-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--yellow);padding:20px 26px;font-size:11px;font-weight:900}.product-sheet-footer button{border:0;background:transparent;font-weight:900;border-bottom:1px solid var(--ink);padding:4px 0}
+/* ORIENTATION SCREEN */
+.rotate-screen{display:none}
+@media (max-width:950px) and (orientation:portrait){html,body{overflow:hidden!important}.rotate-screen{position:fixed;inset:0;z-index:1000;display:block;background:var(--yellow);color:var(--ink)}.rotate-inner{height:100%;padding:30px 26px;display:flex;flex-direction:column;align-items:flex-start}.rot-issue{width:100%;display:flex;justify-content:space-between;font-size:11px;font-weight:900}.rot-phone{height:94px;width:57px;border:5px solid var(--ink);border-radius:11px;margin:auto auto 14px;transform:rotate(-90deg);animation:phone-rotate 2s ease-in-out infinite alternate;position:relative}.rot-phone:after{content:"";height:3px;width:16px;background:var(--ink);position:absolute;left:50%;bottom:4px;transform:translateX(-50%)}.rot-phone-inner{position:absolute;inset:8px 6px;background:var(--coral)}@keyframes phone-rotate{to{transform:rotate(0)}}.rotate-inner h1{font:900 clamp(64px,17vw,120px)/.85 var(--display);letter-spacing:-.08em;margin:14px 0}.rotate-inner p{font-size:19px;line-height:1.3;font-weight:700;max-width:290px}.rot-rule{border-top:2px solid var(--ink);width:100%;margin-top:auto}.rotate-inner small{font-weight:900;margin-top:17px;letter-spacing:.06em}.site-header,.product-sheet,.product-scrim{display:none!important}}
+/* LANDSCAPE MOBILE: preserve the same art direction but protect the short vertical dimension. */
+@media(max-height:620px) and (orientation:landscape){.site-header{height:38px;font-size:8px}.brand{font-size:14px}.brand small{font-size:7px}.header-nav{gap:10px}.header-middle{gap:10px}.cover-issue,.section-kicker{top:49px;font-size:8px}.cover-photo{top:16%;bottom:11%}.cover-title{font-size:12vw;top:33%}.cover-footer{bottom:3%;font-size:9px}.cover-footer b{font-size:13px}.cover-side-copy{font-size:10px}.index-rail{padding-top:48px}.index-rail h2{font-size:6.8vw}.index-body{padding-top:55px;padding-bottom:15px}.index-topline{padding-bottom:8px;font-size:8px}.index-row strong{font-size:3vw}.index-row i{font-size:8px}.index-bottom{font-size:9px}.manifesto-headline,.interlude-big,.closing-typography{top:24%;font-size:11.1vw}.manifesto-bottom{bottom:4%;padding-top:10px}.manifesto-bottom p{font-size:12px}.room-editorial{padding:49px 16px 12px}.room-ed-top,.room-overline{font-size:8px}.room-copy-primary{margin-bottom:9%}.room-overline{margin-bottom:12px}.room-copy-primary h2{font-size:6.2vw;margin-bottom:12px}.room-copy-primary p{font-size:11px}.room-copy-secondary{padding-top:8px}.room-copy-secondary p{font-size:9px}.room-ed-num{font-size:16px}.room-visual-caption{top:49px;font-size:8px}.room-floating{top:23%}.room-floating strong{font-size:6vw}.price-tag{min-width:110px;padding:7px 9px}.price-tag strong{font-size:3.3vw}.price-tag small,.price-tag span{font-size:7px}.price-tag span{margin-top:2px}.interlude-lead{font-size:12px;bottom:5%}.closing-bottom{bottom:13%;font-size:10px}.closing-foot{bottom:4%;font-size:8px}.product-sheet-main{padding:16px}.product-sheet-main h2{font-size:5vw;margin:16px 0}.product-sheet-main p{font-size:12px}.product-sheet-main #product-price{font-size:8vw}.product-sheet-header,.product-sheet-footer{padding:10px 16px}}
+@media (max-width:880px) and (orientation:landscape){.brand small,.header-middle span{display:none}.site-header{grid-template-columns:45px 1fr auto 43px;gap:14px}.room-stage{grid-template-columns:36% 64%}.room-stage-reverse{grid-template-columns:64% 36%}.room-copy-primary h2{font-size:6vw}.room-copy-primary p{font-size:10px}.cover-title{font-size:12.5vw}.index-rail h2{font-size:7vw}.index-row{min-height:15%}.index-row strong{font-size:3vw}.index-row i{font-size:7px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.k-char,.room-image img,.cover-photo img,.room-floating,.price-tag{transform:none!important;opacity:1!important}.rot-phone{animation:none}}
+
+
+/* Editorial full-bleed v2: the viewport is the page, never a framed card. */
+html,body,#magazine{width:100%;max-width:100%;overflow-x:clip}
+.sticky-stage{width:100vw;height:100dvh;min-height:100svh}
+.room-stage,.room-stage-reverse{display:block;position:sticky}
+.room-visual{position:absolute;inset:0;z-index:1;width:100%;height:100%}
+.room-editorial{position:absolute;z-index:5;inset:0 auto 0 0;width:clamp(320px,39vw,690px);max-width:52vw;will-change:transform,opacity}
+.room-stage-reverse .room-editorial{left:auto;right:0}
+.room-stage-reverse .room-visual{inset:0}
+.room-image{inset:0}
+.room-image img{width:100%;height:100%;object-fit:cover}
+.room-floating{left:43%;right:5%;top:26%}
+.room-visual-caption,.room-corner-index{transition:none;will-change:opacity}
+.room-tint{background:linear-gradient(90deg,rgba(0,0,0,.26),transparent 60%),linear-gradient(0deg,rgba(0,0,0,.19),transparent 45%)}
+.price-tag{background:transparent;color:white;min-width:0;box-shadow:none;padding:0;text-shadow:0 2px 22px rgba(0,0,0,.65)}
+.price-tag:hover{background:transparent;color:var(--yellow)}
+.price-tag strong{font-size:clamp(40px,5.8vw,110px)}
+.price-tag small,.price-tag span{font-weight:900}
+@media (max-width:880px) and (orientation:landscape) {
+  .room-stage,.room-stage-reverse{display:block}
+  .room-editorial{width:39vw;max-width:50vw;padding:44px 16px 12px}
+  .room-copy-primary h2{font-size:5.9vw}
+  .room-copy-primary p{font-size:10px}
+  .room-copy-secondary p{font-size:9px}
+  .room-floating{left:45%;right:3%;top:23%}
+  .room-floating strong{font-size:7vw}
+  .price-tag strong{font-size:4.4vw}
+  .price-tag small,.price-tag span{font-size:7px}
+}
+@media (prefers-reduced-motion:reduce) {
+ .room-editorial{transform:none!important;opacity:1!important}
+}
+
+</style>
+</head>
+<body>
+  <div class="rotate-screen" role="status" aria-live="polite">
+    <div class="rotate-inner">
+      <div class="rot-issue">SPATIAL CATALOG <span>ISSUE 001</span></div>
+      <div class="rot-phone" aria-hidden="true"><div class="rot-phone-inner"></div></div>
+      <h1>TURN THE<br>PAGE.</h1>
+      <p>Gira tu dispositivo para leer esta publicación en horizontal.</p>
+      <div class="rot-rule"></div>
+      <small>AN EDITORIAL SPATIAL EXPERIENCE</small>
+    </div>
+  </div>
+
+  <header class="site-header" aria-label="Navegación principal">
+    <a href="#cover" class="brand">S<span class="brand-dot">●</span>C <small>SPATIAL CATALOG</small></a>
+    <div class="header-middle"><span>AN EXPERIMENT IN SPATIAL COMMERCE</span><div class="header-progress" aria-hidden="true"><i id="global-progress"></i></div></div>
+    <nav class="header-nav"><a href="#contents">INDEX</a><a href="#living">ROOMS</a><a href="#closing">ABOUT</a></nav>
+    <div class="header-num" id="page-indicator">01 / 09</div>
+  </header>
+
+  <main id="magazine">
+    <!-- 01 / COVER -->
+    <section class="story-section cover" id="cover" data-scene="cover" data-scene-label="COVER">
+      <div class="sticky-stage cover-stage">
+        <div class="cover-issue"><span>VOL. 01 — THE SPACE ISSUE</span><span>2026 / DIGITAL EDITION</span></div>
+        <div class="cover-photo image-box"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0id2FsbCIgeDI9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZThlM2Q1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZjFlY2RjIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImZsb29yIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkN2I3YTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYTg1NzMiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0id2luIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNhOWQ0ZTEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlOGVkZTEiLz48L2xpbmVhckdyYWRpZW50PjxmaWx0ZXIgaWQ9InNoYWRvdyI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMjIiLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iNzIwIiBmaWxsPSJ1cmwoI3dhbGwpIi8+PHJlY3QgeT0iNzIwIiB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZmxvb3IpIi8+PHBhdGggZD0iTTAgNzE4SDE2MDAiIHN0cm9rZT0iI2E1OGU4MCIgc3Ryb2tlLXdpZHRoPSIxNiIvPjxyZWN0IHg9Ijk1MCIgeT0iOTAiIHdpZHRoPSI0NzAiIGhlaWdodD0iNDgwIiBmaWxsPSIjZWFlOGRiIiBzdHJva2U9IiNmOWY4ZWUiIHN0cm9rZS13aWR0aD0iMzAiLz48cmVjdCB4PSI5NzgiIHk9IjEyMCIgd2lkdGg9IjQxNCIgaGVpZ2h0PSI0MjIiIGZpbGw9InVybCgjd2luKSIvPjxwYXRoIGQ9Ik0xMTg1IDEyMFY1NDJNOTc4IDMzMEgxMzkyIiBzdHJva2U9IiNmNWYzZTkiIHN0cm9rZS13aWR0aD0iMTYiLz48cGF0aCBkPSJNOTgwIDQ3MGM4MC0xMTAgMTM2LTEwMCAyMjAtOTAgOTAgMTAgMTIwLTQwIDE5Mi04NXYyNDRIOTgwWiIgZmlsbD0iI2E5YmZhNyIvPjxwYXRoIGQ9Ik05ODAgNTA1YzE2MC04NSAyNjMtMjAgNDEyLTcwdjEwNUg5ODBaIiBmaWxsPSIjN2E5YzhkIi8+PHJlY3QgeD0iMTMxIiB5PSI3MzgiIHdpZHRoPSIxMTEwIiBoZWlnaHQ9IjE1MCIgcng9IjcwIiBmaWxsPSIjN2U1ZjU3IiBvcGFjaXR5PSIuMjUiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+PHBhdGggZD0iTTE0NyA3NDBRNTQwIDY1NSAxMTc4IDczNUwxMzAwIDkwOCAxMTYgOTA1WiIgZmlsbD0iI2YzZDA2NCIvPjxwYXRoIGQ9Ik0xODQgNzc3bDEwMDIgMzBNMjM1IDgyNGw5MjUgMzBNMjgyIDg3NWw4MzAtMiIgc3Ryb2tlPSIjZTI5ZDYxIiBzdHJva2Utd2lkdGg9IjkiIG9wYWNpdHk9Ii43Ii8+PHJlY3QgeD0iMjg1IiB5PSI1MDEiIHdpZHRoPSI4MjAiIGhlaWdodD0iMjYyIiByeD0iNTEiIGZpbGw9IiMzNzZhNTMiLz48cmVjdCB4PSIyODUiIHk9IjQ2NSIgd2lkdGg9IjgyMCIgaGVpZ2h0PSIyMDAiIHJ4PSI1NSIgZmlsbD0iIzRhOGY2YSIvPjxyZWN0IHg9IjI1MCIgeT0iNDk1IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjI1NSIgcng9IjUyIiBmaWxsPSIjMmM3MDU2Ii8+PHJlY3QgeD0iMTA1NCIgeT0iNDkzIiB3aWR0aD0iMTEyIiBoZWlnaHQ9IjI1NSIgcng9IjUyIiBmaWxsPSIjMmU3MDU0Ii8+PHJlY3QgeD0iMzYwIiB5PSI2NjUiIHdpZHRoPSI2ODgiIGhlaWdodD0iNzAiIHJ4PSIyNSIgZmlsbD0iIzMxNmI1NiIvPjxyZWN0IHg9IjM2MyIgeT0iNTEwIiB3aWR0aD0iMzE1IiBoZWlnaHQ9IjE1MCIgcng9IjQwIiBmaWxsPSIjM2M3ZjYwIi8+PHJlY3QgeD0iNjk4IiB5PSI1MTAiIHdpZHRoPSIzMTUiIGhlaWdodD0iMTUwIiByeD0iNDAiIGZpbGw9IiMzZDdkNjMiLz48cmVjdCB4PSI0NTUiIHk9IjUzNSIgd2lkdGg9IjEzNiIgaGVpZ2h0PSIxMTUiIHJ4PSIxNiIgZmlsbD0iI2Y1YmFiYSIgdHJhbnNmb3JtPSJyb3RhdGUoLTExIDUyMCA1NzApIi8+PHJlY3QgeD0iNzUwIiB5PSI1MzUiIHdpZHRoPSIxNDUiIGhlaWdodD0iMTE2IiByeD0iMTgiIGZpbGw9IiNlZWM2NWQiIHRyYW5zZm9ybT0icm90YXRlKDEzIDgzMCA2MDApIi8+PGVsbGlwc2UgY3g9IjcyMCIgY3k9IjgwMiIgcng9IjI4NSIgcnk9IjM3IiBmaWxsPSIjNTAzNjJmIiBvcGFjaXR5PSIuMjIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9Ijc2OCIgcng9IjI1MiIgcnk9Ijc0IiBmaWxsPSIjOWQ1MTQzIi8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9Ijc1MCIgcng9IjI1MiIgcnk9IjYzIiBmaWxsPSIjZTE4YjY3Ii8+PHJlY3QgeD0iNTQzIiB5PSI3ODIiIHdpZHRoPSIyOCIgaGVpZ2h0PSIxMTUiIHJ4PSI5IiBmaWxsPSIjNzQ0MzM2Ii8+PHJlY3QgeD0iODcxIiB5PSI3ODIiIHdpZHRoPSIyOCIgaGVpZ2h0PSIxMTUiIHJ4PSI5IiBmaWxsPSIjNzQ0MzM2Ii8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9IjczMCIgcng9IjUxIiByeT0iMjciIGZpbGw9IiNkZmUwY2MiLz48cGF0aCBkPSJNNzEwIDcyNmMtMjItMjItMTktMzggNC00MiAyOCAxIDQ0IDMyIDE4IDQ1IiBmaWxsPSIjZjZmNmU4Ii8+PHBhdGggZD0iTTE1MiAxNTBoMjMwdjI5MkgxNTJaIiBmaWxsPSIjZTZiYzgzIi8+PHJlY3QgeD0iMTY3IiB5PSIxNjYiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjYwIiBmaWxsPSIjZTlkNmIwIi8+PGNpcmNsZSBjeD0iMjY1IiBjeT0iMjg2IiByPSI2OSIgZmlsbD0iI2YyNjM1MyIvPjxwYXRoIGQ9Ik0yNDIgMjcwYzU1LTU3IDEwMyAxNCA2MSA1MSIgc3Ryb2tlPSIjZjRkMzQwIiBzdHJva2Utd2lkdGg9IjI1IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE0NTAgODUwVjM4NSIgc3Ryb2tlPSIjMjYyNjI0IiBzdHJva2Utd2lkdGg9IjEzIi8+PHBhdGggZD0iTTEzNTUgMzg4cTEwMC0xNzAgMTkwIDBaIiBmaWxsPSIjZjNjZTQzIi8+PGVsbGlwc2UgY3g9IjE0NTIiIGN5PSI0MDUiIHJ4PSI4MCIgcnk9IjgiIGZpbGw9IiNiNDhmMjQiLz48dGV4dCB4PSI2NSIgeT0iOTY3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMzMyODIwIiBsZXR0ZXItc3BhY2luZz0iNyI+RURJVE9SSUFMIFNDRU5FIFNUVURZIC8gTElWSU5HPC90ZXh0Pjwvc3ZnPgo=" data-photo="https://images.pexels.com/photos/6969830/pexels-photo-6969830.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1800" data-fallback="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0id2FsbCIgeDI9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZThlM2Q1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZjFlY2RjIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImZsb29yIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkN2I3YTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYTg1NzMiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0id2luIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNhOWQ0ZTEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlOGVkZTEiLz48L2xpbmVhckdyYWRpZW50PjxmaWx0ZXIgaWQ9InNoYWRvdyI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMjIiLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iNzIwIiBmaWxsPSJ1cmwoI3dhbGwpIi8+PHJlY3QgeT0iNzIwIiB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZmxvb3IpIi8+PHBhdGggZD0iTTAgNzE4SDE2MDAiIHN0cm9rZT0iI2E1OGU4MCIgc3Ryb2tlLXdpZHRoPSIxNiIvPjxyZWN0IHg9Ijk1MCIgeT0iOTAiIHdpZHRoPSI0NzAiIGhlaWdodD0iNDgwIiBmaWxsPSIjZWFlOGRiIiBzdHJva2U9IiNmOWY4ZWUiIHN0cm9rZS13aWR0aD0iMzAiLz48cmVjdCB4PSI5NzgiIHk9IjEyMCIgd2lkdGg9IjQxNCIgaGVpZ2h0PSI0MjIiIGZpbGw9InVybCgjd2luKSIvPjxwYXRoIGQ9Ik0xMTg1IDEyMFY1NDJNOTc4IDMzMEgxMzkyIiBzdHJva2U9IiNmNWYzZTkiIHN0cm9rZS13aWR0aD0iMTYiLz48cGF0aCBkPSJNOTgwIDQ3MGM4MC0xMTAgMTM2LTEwMCAyMjAtOTAgOTAgMTAgMTIwLTQwIDE5Mi04NXYyNDRIOTgwWiIgZmlsbD0iI2E5YmZhNyIvPjxwYXRoIGQ9Ik05ODAgNTA1YzE2MC04NSAyNjMtMjAgNDEyLTcwdjEwNUg5ODBaIiBmaWxsPSIjN2E5YzhkIi8+PHJlY3QgeD0iMTMxIiB5PSI3MzgiIHdpZHRoPSIxMTEwIiBoZWlnaHQ9IjE1MCIgcng9IjcwIiBmaWxsPSIjN2U1ZjU3IiBvcGFjaXR5PSIuMjUiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+PHBhdGggZD0iTTE0NyA3NDBRNTQwIDY1NSAxMTc4IDczNUwxMzAwIDkwOCAxMTYgOTA1WiIgZmlsbD0iI2YzZDA2NCIvPjxwYXRoIGQ9Ik0xODQgNzc3bDEwMDIgMzBNMjM1IDgyNGw5MjUgMzBNMjgyIDg3NWw4MzAtMiIgc3Ryb2tlPSIjZTI5ZDYxIiBzdHJva2Utd2lkdGg9IjkiIG9wYWNpdHk9Ii43Ii8+PHJlY3QgeD0iMjg1IiB5PSI1MDEiIHdpZHRoPSI4MjAiIGhlaWdodD0iMjYyIiByeD0iNTEiIGZpbGw9IiMzNzZhNTMiLz48cmVjdCB4PSIyODUiIHk9IjQ2NSIgd2lkdGg9IjgyMCIgaGVpZ2h0PSIyMDAiIHJ4PSI1NSIgZmlsbD0iIzRhOGY2YSIvPjxyZWN0IHg9IjI1MCIgeT0iNDk1IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjI1NSIgcng9IjUyIiBmaWxsPSIjMmM3MDU2Ii8+PHJlY3QgeD0iMTA1NCIgeT0iNDkzIiB3aWR0aD0iMTEyIiBoZWlnaHQ9IjI1NSIgcng9IjUyIiBmaWxsPSIjMmU3MDU0Ii8+PHJlY3QgeD0iMzYwIiB5PSI2NjUiIHdpZHRoPSI2ODgiIGhlaWdodD0iNzAiIHJ4PSIyNSIgZmlsbD0iIzMxNmI1NiIvPjxyZWN0IHg9IjM2MyIgeT0iNTEwIiB3aWR0aD0iMzE1IiBoZWlnaHQ9IjE1MCIgcng9IjQwIiBmaWxsPSIjM2M3ZjYwIi8+PHJlY3QgeD0iNjk4IiB5PSI1MTAiIHdpZHRoPSIzMTUiIGhlaWdodD0iMTUwIiByeD0iNDAiIGZpbGw9IiMzZDdkNjMiLz48cmVjdCB4PSI0NTUiIHk9IjUzNSIgd2lkdGg9IjEzNiIgaGVpZ2h0PSIxMTUiIHJ4PSIxNiIgZmlsbD0iI2Y1YmFiYSIgdHJhbnNmb3JtPSJyb3RhdGUoLTExIDUyMCA1NzApIi8+PHJlY3QgeD0iNzUwIiB5PSI1MzUiIHdpZHRoPSIxNDUiIGhlaWdodD0iMTE2IiByeD0iMTgiIGZpbGw9IiNlZWM2NWQiIHRyYW5zZm9ybT0icm90YXRlKDEzIDgzMCA2MDApIi8+PGVsbGlwc2UgY3g9IjcyMCIgY3k9IjgwMiIgcng9IjI4NSIgcnk9IjM3IiBmaWxsPSIjNTAzNjJmIiBvcGFjaXR5PSIuMjIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9Ijc2OCIgcng9IjI1MiIgcnk9Ijc0IiBmaWxsPSIjOWQ1MTQzIi8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9Ijc1MCIgcng9IjI1MiIgcnk9IjYzIiBmaWxsPSIjZTE4YjY3Ii8+PHJlY3QgeD0iNTQzIiB5PSI3ODIiIHdpZHRoPSIyOCIgaGVpZ2h0PSIxMTUiIHJ4PSI5IiBmaWxsPSIjNzQ0MzM2Ii8+PHJlY3QgeD0iODcxIiB5PSI3ODIiIHdpZHRoPSIyOCIgaGVpZ2h0PSIxMTUiIHJ4PSI5IiBmaWxsPSIjNzQ0MzM2Ii8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9IjczMCIgcng9IjUxIiByeT0iMjciIGZpbGw9IiNkZmUwY2MiLz48cGF0aCBkPSJNNzEwIDcyNmMtMjItMjItMTktMzggNC00MiAyOCAxIDQ0IDMyIDE4IDQ1IiBmaWxsPSIjZjZmNmU4Ii8+PHBhdGggZD0iTTE1MiAxNTBoMjMwdjI5MkgxNTJaIiBmaWxsPSIjZTZiYzgzIi8+PHJlY3QgeD0iMTY3IiB5PSIxNjYiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjYwIiBmaWxsPSIjZTlkNmIwIi8+PGNpcmNsZSBjeD0iMjY1IiBjeT0iMjg2IiByPSI2OSIgZmlsbD0iI2YyNjM1MyIvPjxwYXRoIGQ9Ik0yNDIgMjcwYzU1LTU3IDEwMyAxNCA2MSA1MSIgc3Ryb2tlPSIjZjRkMzQwIiBzdHJva2Utd2lkdGg9IjI1IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE0NTAgODUwVjM4NSIgc3Ryb2tlPSIjMjYyNjI0IiBzdHJva2Utd2lkdGg9IjEzIi8+PHBhdGggZD0iTTEzNTUgMzg4cTEwMC0xNzAgMTkwIDBaIiBmaWxsPSIjZjNjZTQzIi8+PGVsbGlwc2UgY3g9IjE0NTIiIGN5PSI0MDUiIHJ4PSI4MCIgcnk9IjgiIGZpbGw9IiNiNDhmMjQiLz48dGV4dCB4PSI2NSIgeT0iOTY3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMzMyODIwIiBsZXR0ZXItc3BhY2luZz0iNyI+RURJVE9SSUFMIFNDRU5FIFNUVURZIC8gTElWSU5HPC90ZXh0Pjwvc3ZnPgo=" alt="Interior de sala contemporánea, imagen temporal hasta integrar el Gaussian Splat" /></div>
+        <div class="cover-colorblock"></div>
+        <p class="cover-side-copy">A new way to<br />read, explore<br />and shop space.</p>
+        <div class="cover-title"><div class="cover-title-row" data-kinetic data-kinetic-start="-0.48" data-kinetic-end="-0.04">SPATIAL</div><div class="cover-title-row indent" data-kinetic data-kinetic-start="-0.48" data-kinetic-end="-0.04">CATALOG</div></div>
+        <div class="cover-footer"><div><b>HOW SPACE<br>BECOMES COMMERCE.</b></div><div>THE ROOM IS NOT A BACKDROP.<br>IT IS THE INTERFACE.</div><div class="cover-scroll">SCROLL TO READ <span>↓</span></div></div>
+        <span class="cover-big-numeral">01</span>
+      </div>
+    </section>
+
+    <!-- 02 / CONTENTS -->
+    <section class="story-section contents" id="contents" data-scene="contents" data-scene-label="INDEX">
+      <div class="sticky-stage contents-stage">
+        <div class="index-rail"><div class="tiny-marker">CONTENTS<br>ISSUE 001</div><h2 data-kinetic data-kinetic-start="0.08" data-kinetic-end="0.62">INSIDE<br>THIS<br>ISSUE.</h2><p>A collection of spaces.<br>A new language of commerce.</p><span class="index-number">02</span></div>
+        <div class="index-body">
+          <div class="index-topline"><span>THE EDITORIAL / 03 ROOMS</span><span>SELECT A CHAPTER ↘</span></div>
+          <a class="index-row" href="#manifesto"><span>00</span><strong>THE IDEA</strong><i>SPATIAL COMMERCE ↗</i></a>
+          <a class="index-row" href="#living"><span>01</span><strong>LIVING ROOM</strong><i>THE EVERYDAY ↗</i></a>
+          <a class="index-row" href="#bedroom"><span>02</span><strong>BEDROOM</strong><i>THE PERSONAL ↗</i></a>
+          <a class="index-row" href="#dining"><span>03</span><strong>DINING ROOM</strong><i>THE GATHERING ↗</i></a>
+          <div class="index-bottom"><span>NOT A TOUR.<br>NOT A PRODUCT GRID.</span><span>A DIFFERENT WAY<br>TO EXPERIENCE A CATALOG.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 / MANIFESTO -->
+    <section class="story-section manifesto" id="manifesto" data-scene="manifesto" data-scene-label="THE IDEA">
+      <div class="sticky-stage manifesto-stage">
+        <div class="section-kicker light"><span>AN EDITORIAL MANIFESTO</span><span>00 / THE IDEA</span></div>
+        <div class="manifesto-headline"><div data-kinetic data-kinetic-start="0.05" data-kinetic-end="0.61">WHAT IF</div><div data-kinetic data-kinetic-start="0.21" data-kinetic-end="0.77">A ROOM</div><div data-kinetic data-kinetic-start="0.36" data-kinetic-end="0.93">COULD SELL?</div></div>
+        <div class="manifesto-bottom"><span class="manifesto-symbol">↗</span><p>What happens when the place where products live becomes the place where they are discovered, understood and purchased?</p><span class="section-page">03 / 09</span></div>
+      </div>
+    </section>
+
+    <!-- 04 / LIVING ROOM -->
+    <section class="story-section room room-living" id="living" data-scene="living" data-scene-label="LIVING ROOM">
+      <div class="sticky-stage room-stage">
+        <div class="room-editorial room-editorial-living">
+          <div class="room-ed-top">01 / ROOM STUDY <span>LIVING</span></div>
+          <div class="room-copy-primary"><div class="room-overline">THE EVERYDAY / CHAPTER 01</div><h2 data-kinetic data-kinetic-start="0.05" data-kinetic-end="0.55">LIVING<br>ROOM.</h2><p>El espacio deja de ser una fotografía y se convierte en el contexto de cada producto.</p></div>
+          <div class="room-copy-secondary"><span class="room-ed-rule"></span><p>El sofá, la lámpara y la mesa ya no aparecen aislados. Se descubren donde realmente tienen sentido.</p><div class="room-ed-num">01—03</div></div>
+        </div>
+        <div class="room-visual" data-room="living">
+          <div class="room-image image-box"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0id2FsbCIgeDI9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZThlM2Q1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZjFlY2RjIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImZsb29yIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkN2I3YTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYTg1NzMiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0id2luIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNhOWQ0ZTEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlOGVkZTEiLz48L2xpbmVhckdyYWRpZW50PjxmaWx0ZXIgaWQ9InNoYWRvdyI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMjIiLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iNzIwIiBmaWxsPSJ1cmwoI3dhbGwpIi8+PHJlY3QgeT0iNzIwIiB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZmxvb3IpIi8+PHBhdGggZD0iTTAgNzE4SDE2MDAiIHN0cm9rZT0iI2E1OGU4MCIgc3Ryb2tlLXdpZHRoPSIxNiIvPjxyZWN0IHg9Ijk1MCIgeT0iOTAiIHdpZHRoPSI0NzAiIGhlaWdodD0iNDgwIiBmaWxsPSIjZWFlOGRiIiBzdHJva2U9IiNmOWY4ZWUiIHN0cm9rZS13aWR0aD0iMzAiLz48cmVjdCB4PSI5NzgiIHk9IjEyMCIgd2lkdGg9IjQxNCIgaGVpZ2h0PSI0MjIiIGZpbGw9InVybCgjd2luKSIvPjxwYXRoIGQ9Ik0xMTg1IDEyMFY1NDJNOTc4IDMzMEgxMzkyIiBzdHJva2U9IiNmNWYzZTkiIHN0cm9rZS13aWR0aD0iMTYiLz48cGF0aCBkPSJNOTgwIDQ3MGM4MC0xMTAgMTM2LTEwMCAyMjAtOTAgOTAgMTAgMTIwLTQwIDE5Mi04NXYyNDRIOTgwWiIgZmlsbD0iI2E5YmZhNyIvPjxwYXRoIGQ9Ik05ODAgNTA1YzE2MC04NSAyNjMtMjAgNDEyLTcwdjEwNUg5ODBaIiBmaWxsPSIjN2E5YzhkIi8+PHJlY3QgeD0iMTMxIiB5PSI3MzgiIHdpZHRoPSIxMTEwIiBoZWlnaHQ9IjE1MCIgcng9IjcwIiBmaWxsPSIjN2U1ZjU3IiBvcGFjaXR5PSIuMjUiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+PHBhdGggZD0iTTE0NyA3NDBRNTQwIDY1NSAxMTc4IDczNUwxMzAwIDkwOCAxMTYgOTA1WiIgZmlsbD0iI2YzZDA2NCIvPjxwYXRoIGQ9Ik0xODQgNzc3bDEwMDIgMzBNMjM1IDgyNGw5MjUgMzBNMjgyIDg3NWw4MzAtMiIgc3Ryb2tlPSIjZTI5ZDYxIiBzdHJva2Utd2lkdGg9IjkiIG9wYWNpdHk9Ii43Ii8+PHJlY3QgeD0iMjg1IiB5PSI1MDEiIHdpZHRoPSI4MjAiIGhlaWdodD0iMjYyIiByeD0iNTEiIGZpbGw9IiMzNzZhNTMiLz48cmVjdCB4PSIyODUiIHk9IjQ2NSIgd2lkdGg9IjgyMCIgaGVpZ2h0PSIyMDAiIHJ4PSI1NSIgZmlsbD0iIzRhOGY2YSIvPjxyZWN0IHg9IjI1MCIgeT0iNDk1IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjI1NSIgcng9IjUyIiBmaWxsPSIjMmM3MDU2Ii8+PHJlY3QgeD0iMTA1NCIgeT0iNDkzIiB3aWR0aD0iMTEyIiBoZWlnaHQ9IjI1NSIgcng9IjUyIiBmaWxsPSIjMmU3MDU0Ii8+PHJlY3QgeD0iMzYwIiB5PSI2NjUiIHdpZHRoPSI2ODgiIGhlaWdodD0iNzAiIHJ4PSIyNSIgZmlsbD0iIzMxNmI1NiIvPjxyZWN0IHg9IjM2MyIgeT0iNTEwIiB3aWR0aD0iMzE1IiBoZWlnaHQ9IjE1MCIgcng9IjQwIiBmaWxsPSIjM2M3ZjYwIi8+PHJlY3QgeD0iNjk4IiB5PSI1MTAiIHdpZHRoPSIzMTUiIGhlaWdodD0iMTUwIiByeD0iNDAiIGZpbGw9IiMzZDdkNjMiLz48cmVjdCB4PSI0NTUiIHk9IjUzNSIgd2lkdGg9IjEzNiIgaGVpZ2h0PSIxMTUiIHJ4PSIxNiIgZmlsbD0iI2Y1YmFiYSIgdHJhbnNmb3JtPSJyb3RhdGUoLTExIDUyMCA1NzApIi8+PHJlY3QgeD0iNzUwIiB5PSI1MzUiIHdpZHRoPSIxNDUiIGhlaWdodD0iMTE2IiByeD0iMTgiIGZpbGw9IiNlZWM2NWQiIHRyYW5zZm9ybT0icm90YXRlKDEzIDgzMCA2MDApIi8+PGVsbGlwc2UgY3g9IjcyMCIgY3k9IjgwMiIgcng9IjI4NSIgcnk9IjM3IiBmaWxsPSIjNTAzNjJmIiBvcGFjaXR5PSIuMjIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9Ijc2OCIgcng9IjI1MiIgcnk9Ijc0IiBmaWxsPSIjOWQ1MTQzIi8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9Ijc1MCIgcng9IjI1MiIgcnk9IjYzIiBmaWxsPSIjZTE4YjY3Ii8+PHJlY3QgeD0iNTQzIiB5PSI3ODIiIHdpZHRoPSIyOCIgaGVpZ2h0PSIxMTUiIHJ4PSI5IiBmaWxsPSIjNzQ0MzM2Ii8+PHJlY3QgeD0iODcxIiB5PSI3ODIiIHdpZHRoPSIyOCIgaGVpZ2h0PSIxMTUiIHJ4PSI5IiBmaWxsPSIjNzQ0MzM2Ii8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9IjczMCIgcng9IjUxIiByeT0iMjciIGZpbGw9IiNkZmUwY2MiLz48cGF0aCBkPSJNNzEwIDcyNmMtMjItMjItMTktMzggNC00MiAyOCAxIDQ0IDMyIDE4IDQ1IiBmaWxsPSIjZjZmNmU4Ii8+PHBhdGggZD0iTTE1MiAxNTBoMjMwdjI5MkgxNTJaIiBmaWxsPSIjZTZiYzgzIi8+PHJlY3QgeD0iMTY3IiB5PSIxNjYiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjYwIiBmaWxsPSIjZTlkNmIwIi8+PGNpcmNsZSBjeD0iMjY1IiBjeT0iMjg2IiByPSI2OSIgZmlsbD0iI2YyNjM1MyIvPjxwYXRoIGQ9Ik0yNDIgMjcwYzU1LTU3IDEwMyAxNCA2MSA1MSIgc3Ryb2tlPSIjZjRkMzQwIiBzdHJva2Utd2lkdGg9IjI1IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE0NTAgODUwVjM4NSIgc3Ryb2tlPSIjMjYyNjI0IiBzdHJva2Utd2lkdGg9IjEzIi8+PHBhdGggZD0iTTEzNTUgMzg4cTEwMC0xNzAgMTkwIDBaIiBmaWxsPSIjZjNjZTQzIi8+PGVsbGlwc2UgY3g9IjE0NTIiIGN5PSI0MDUiIHJ4PSI4MCIgcnk9IjgiIGZpbGw9IiNiNDhmMjQiLz48dGV4dCB4PSI2NSIgeT0iOTY3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMzMyODIwIiBsZXR0ZXItc3BhY2luZz0iNyI+RURJVE9SSUFMIFNDRU5FIFNUVURZIC8gTElWSU5HPC90ZXh0Pjwvc3ZnPgo=" data-photo="https://images.pexels.com/photos/6969830/pexels-photo-6969830.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1800" data-fallback="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0id2FsbCIgeDI9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZThlM2Q1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZjFlY2RjIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImZsb29yIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkN2I3YTAiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiYTg1NzMiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0id2luIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNhOWQ0ZTEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlOGVkZTEiLz48L2xpbmVhckdyYWRpZW50PjxmaWx0ZXIgaWQ9InNoYWRvdyI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMjIiLz48L2ZpbHRlcj48L2RlZnM+PHJlY3Qgd2lkdGg9IjE2MDAiIGhlaWdodD0iNzIwIiBmaWxsPSJ1cmwoI3dhbGwpIi8+PHJlY3QgeT0iNzIwIiB3aWR0aD0iMTYwMCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjZmxvb3IpIi8+PHBhdGggZD0iTTAgNzE4SDE2MDAiIHN0cm9rZT0iI2E1OGU4MCIgc3Ryb2tlLXdpZHRoPSIxNiIvPjxyZWN0IHg9Ijk1MCIgeT0iOTAiIHdpZHRoPSI0NzAiIGhlaWdodD0iNDgwIiBmaWxsPSIjZWFlOGRiIiBzdHJva2U9IiNmOWY4ZWUiIHN0cm9rZS13aWR0aD0iMzAiLz48cmVjdCB4PSI5NzgiIHk9IjEyMCIgd2lkdGg9IjQxNCIgaGVpZ2h0PSI0MjIiIGZpbGw9InVybCgjd2luKSIvPjxwYXRoIGQ9Ik0xMTg1IDEyMFY1NDJNOTc4IDMzMEgxMzkyIiBzdHJva2U9IiNmNWYzZTkiIHN0cm9rZS13aWR0aD0iMTYiLz48cGF0aCBkPSJNOTgwIDQ3MGM4MC0xMTAgMTM2LTEwMCAyMjAtOTAgOTAgMTAgMTIwLTQwIDE5Mi04NXYyNDRIOTgwWiIgZmlsbD0iI2E5YmZhNyIvPjxwYXRoIGQ9Ik05ODAgNTA1YzE2MC04NSAyNjMtMjAgNDEyLTcwdjEwNUg5ODBaIiBmaWxsPSIjN2E5YzhkIi8+PHJlY3QgeD0iMTMxIiB5PSI3MzgiIHdpZHRoPSIxMTEwIiBoZWlnaHQ9IjE1MCIgcng9IjcwIiBmaWxsPSIjN2U1ZjU3IiBvcGFjaXR5PSIuMjUiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+PHBhdGggZD0iTTE0NyA3NDBRNTQwIDY1NSAxMTc4IDczNUwxMzAwIDkwOCAxMTYgOTA1WiIgZmlsbD0iI2YzZDA2NCIvPjxwYXRoIGQ9Ik0xODQgNzc3bDEwMDIgMzBNMjM1IDgyNGw5MjUgMzBNMjgyIDg3NWw4MzAtMiIgc3Ryb2tlPSIjZTI5ZDYxIiBzdHJva2Utd2lkdGg9IjkiIG9wYWNpdHk9Ii43Ii8+PHJlY3QgeD0iMjg1IiB5PSI1MDEiIHdpZHRoPSI4MjAiIGhlaWdodD0iMjYyIiByeD0iNTEiIGZpbGw9IiMzNzZhNTMiLz48cmVjdCB4PSIyODUiIHk9IjQ2NSIgd2lkdGg9IjgyMCIgaGVpZ2h0PSIyMDAiIHJ4PSI1NSIgZmlsbD0iIzRhOGY2YSIvPjxyZWN0IHg9IjI1MCIgeT0iNDk1IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjI1NSIgcng9IjUyIiBmaWxsPSIjMmM3MDU2Ii8+PHJlY3QgeD0iMTA1NCIgeT0iNDkzIiB3aWR0aD0iMTEyIiBoZWlnaHQ9IjI1NSIgcng9IjUyIiBmaWxsPSIjMmU3MDU0Ii8+PHJlY3QgeD0iMzYwIiB5PSI2NjUiIHdpZHRoPSI2ODgiIGhlaWdodD0iNzAiIHJ4PSIyNSIgZmlsbD0iIzMxNmI1NiIvPjxyZWN0IHg9IjM2MyIgeT0iNTEwIiB3aWR0aD0iMzE1IiBoZWlnaHQ9IjE1MCIgcng9IjQwIiBmaWxsPSIjM2M3ZjYwIi8+PHJlY3QgeD0iNjk4IiB5PSI1MTAiIHdpZHRoPSIzMTUiIGhlaWdodD0iMTUwIiByeD0iNDAiIGZpbGw9IiMzZDdkNjMiLz48cmVjdCB4PSI0NTUiIHk9IjUzNSIgd2lkdGg9IjEzNiIgaGVpZ2h0PSIxMTUiIHJ4PSIxNiIgZmlsbD0iI2Y1YmFiYSIgdHJhbnNmb3JtPSJyb3RhdGUoLTExIDUyMCA1NzApIi8+PHJlY3QgeD0iNzUwIiB5PSI1MzUiIHdpZHRoPSIxNDUiIGhlaWdodD0iMTE2IiByeD0iMTgiIGZpbGw9IiNlZWM2NWQiIHRyYW5zZm9ybT0icm90YXRlKDEzIDgzMCA2MDApIi8+PGVsbGlwc2UgY3g9IjcyMCIgY3k9IjgwMiIgcng9IjI4NSIgcnk9IjM3IiBmaWxsPSIjNTAzNjJmIiBvcGFjaXR5PSIuMjIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9Ijc2OCIgcng9IjI1MiIgcnk9Ijc0IiBmaWxsPSIjOWQ1MTQzIi8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9Ijc1MCIgcng9IjI1MiIgcnk9IjYzIiBmaWxsPSIjZTE4YjY3Ii8+PHJlY3QgeD0iNTQzIiB5PSI3ODIiIHdpZHRoPSIyOCIgaGVpZ2h0PSIxMTUiIHJ4PSI5IiBmaWxsPSIjNzQ0MzM2Ii8+PHJlY3QgeD0iODcxIiB5PSI3ODIiIHdpZHRoPSIyOCIgaGVpZ2h0PSIxMTUiIHJ4PSI5IiBmaWxsPSIjNzQ0MzM2Ii8+PGVsbGlwc2UgY3g9IjcyNSIgY3k9IjczMCIgcng9IjUxIiByeT0iMjciIGZpbGw9IiNkZmUwY2MiLz48cGF0aCBkPSJNNzEwIDcyNmMtMjItMjItMTktMzggNC00MiAyOCAxIDQ0IDMyIDE4IDQ1IiBmaWxsPSIjZjZmNmU4Ii8+PHBhdGggZD0iTTE1MiAxNTBoMjMwdjI5MkgxNTJaIiBmaWxsPSIjZTZiYzgzIi8+PHJlY3QgeD0iMTY3IiB5PSIxNjYiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjYwIiBmaWxsPSIjZTlkNmIwIi8+PGNpcmNsZSBjeD0iMjY1IiBjeT0iMjg2IiByPSI2OSIgZmlsbD0iI2YyNjM1MyIvPjxwYXRoIGQ9Ik0yNDIgMjcwYzU1LTU3IDEwMyAxNCA2MSA1MSIgc3Ryb2tlPSIjZjRkMzQwIiBzdHJva2Utd2lkdGg9IjI1IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTE0NTAgODUwVjM4NSIgc3Ryb2tlPSIjMjYyNjI0IiBzdHJva2Utd2lkdGg9IjEzIi8+PHBhdGggZD0iTTEzNTUgMzg4cTEwMC0xNzAgMTkwIDBaIiBmaWxsPSIjZjNjZTQzIi8+PGVsbGlwc2UgY3g9IjE0NTIiIGN5PSI0MDUiIHJ4PSI4MCIgcnk9IjgiIGZpbGw9IiNiNDhmMjQiLz48dGV4dCB4PSI2NSIgeT0iOTY3IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMzMyODIwIiBsZXR0ZXItc3BhY2luZz0iNyI+RURJVE9SSUFMIFNDRU5FIFNUVURZIC8gTElWSU5HPC90ZXh0Pjwvc3ZnPgo=" alt="Visual temporal de living room" /></div>
+          <div class="room-tint"></div>
+          <div class="room-visual-caption">SCENE 01 / LIVING ROOM <span>VISUAL PLACEHOLDER · 3D NEXT</span></div>
+          <div class="room-floating intro-float" data-reveal="0.13" data-hide="0.51"><span>01 — OBJECTS IN CONTEXT</span><strong>EVERYTHING<br>HAS ITS PLACE.</strong></div>
+          <button class="price-tag price-living-1" data-product="sofa" data-reveal="0.48" data-hide="0.98"><small>01 / MODULAR SOFA</small><strong>$890</strong><span>SEE PRODUCT ↗</span></button>
+          <button class="price-tag price-living-2" data-product="lamp" data-reveal="0.58" data-hide="0.98"><small>02 / FLOOR LAMP</small><strong>$129</strong><span>SEE PRODUCT ↗</span></button>
+          <button class="price-tag price-living-3" data-product="table" data-reveal="0.68" data-hide="0.98"><small>03 / LOW TABLE</small><strong>$240</strong><span>SEE PRODUCT ↗</span></button>
+          <div class="room-corner-index">SC / 001</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 / COLOR INTERLUDE -->
+    <section class="story-section interlude interlude-coral" id="interlude-one" data-scene="interlude-one" data-scene-label="THE CONTEXT">
+      <div class="sticky-stage interlude-stage">
+        <div class="section-kicker"><span>THE POWER OF CONTEXT</span><span>EDITORIAL / 01</span></div>
+        <div class="interlude-big"><div data-kinetic data-kinetic-start="0.07" data-kinetic-end="0.67">A PRODUCT</div><div data-kinetic data-kinetic-start="0.23" data-kinetic-end="0.79">IS NEVER</div><div data-kinetic data-kinetic-start="0.37" data-kinetic-end="0.92">ALONE.</div></div>
+        <div class="interlude-lead">Su valor cambia cuando podemos verlo en relación con otros objetos, materiales, proporciones y usos.</div>
+        <span class="interlude-number">05</span>
+      </div>
+    </section>
+
+    <!-- 06 / BEDROOM -->
+    <section class="story-section room room-bedroom" id="bedroom" data-scene="bedroom" data-scene-label="BEDROOM">
+      <div class="sticky-stage room-stage room-stage-reverse">
+        <div class="room-visual" data-room="bedroom">
+          <div class="room-image image-box"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0id2FsbCIgeDI9IjEiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjYzZkMmNmIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYjViZmMwIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImZsb29yIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNjOTlmODciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNhNzcwNWQiLz48L2xpbmVhckdyYWRpZW50PjxmaWx0ZXIgaWQ9ImJsdXIiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjI3Ii8+PC9maWx0ZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjcyMSIgZmlsbD0idXJsKCN3YWxsKSIvPjxyZWN0IHk9IjcyMSIgd2lkdGg9IjE2MDAiIGhlaWdodD0iMjc5IiBmaWxsPSJ1cmwoI2Zsb29yKSIvPjxwYXRoIGQ9Ik0wIDcyMWgxNjAwIiBzdHJva2U9IiNiMmE1OWEiIHN0cm9rZS13aWR0aD0iMTIiLz48cmVjdCB4PSIxMzUiIHk9IjExMCIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIzODAiIGZpbGw9IiNlZWU5ZDgiIHN0cm9rZT0iI2ZhZjhlZSIgc3Ryb2tlLXdpZHRoPSIyMCIvPjxyZWN0IHg9IjE1OSIgeT0iMTMzIiB3aWR0aD0iMzEyIiBoZWlnaHQ9IjMzOCIgZmlsbD0iI2Y2YmU1ZCIvPjxwYXRoIGQ9Ik0xNzAgNDM2TDMwNSAxNzVsMTY1IDI2MCIgZmlsbD0iI2RhNjY2MSIvPjxwYXRoIGQ9Ik0xODAgMTgwaDI2MCIgc3Ryb2tlPSIjNmU5NWQ0IiBzdHJva2Utd2lkdGg9IjU1Ii8+PGNpcmNsZSBjeD0iMzUxIiBjeT0iMzE2IiByPSI2OSIgZmlsbD0iIzMxNTNhYSIvPjxyZWN0IHg9IjExNTAiIHk9IjExMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0NjAiIGZpbGw9IiNlZWU5ZGQiIHN0cm9rZT0iI2ZmZjllNiIgc3Ryb2tlLXdpZHRoPSIyMCIvPjxyZWN0IHg9IjExODAiIHk9IjEzOSIgd2lkdGg9IjIyMCIgaGVpZ2h0PSIzOTkiIGZpbGw9IiNhMmNiZDMiLz48cGF0aCBkPSJNMTI5MCAxMzl2Mzk5TTExODAgMzMzaDIyMCIgc3Ryb2tlPSIjZjlmOGU5IiBzdHJva2Utd2lkdGg9IjE0Ii8+PHBhdGggZD0iTTExODAgNDkwbDg1LTExMCAxMDAgNzAgMzUtNDl2MTMyaC0yMjBaIiBmaWxsPSIjYTNiOWFkIi8+PGVsbGlwc2UgY3g9Ijc3NyIgY3k9IjgzNiIgcng9IjU3MyIgcnk9IjkwIiBmaWxsPSIjNmM0YTQ0IiBvcGFjaXR5PSIuMjMiIGZpbHRlcj0idXJsKCNibHVyKSIvPjxyZWN0IHg9IjMzMiIgeT0iMzc1IiB3aWR0aD0iODYzIiBoZWlnaHQ9IjMxOCIgcng9IjQ0IiBmaWxsPSIjMzU1ZDZiIi8+PHJlY3QgeD0iMzY2IiB5PSI0MDgiIHdpZHRoPSI3OTUiIGhlaWdodD0iMjY2IiByeD0iMjYiIGZpbGw9IiM1MzgwOTIiLz48cmVjdCB4PSIyNTgiIHk9IjYxOCIgd2lkdGg9IjEwMDAiIGhlaWdodD0iMTg1IiByeD0iMTYiIGZpbGw9IiNiNGE4OWMiLz48cmVjdCB4PSIyODAiIHk9IjYwOCIgd2lkdGg9Ijk1NiIgaGVpZ2h0PSIxNTAiIHJ4PSIxNiIgZmlsbD0iI2ZmZmFmMCIvPjxwYXRoIGQ9Ik0yODYgNjY2UTU0MCA2MTIgNzgwIDY2N1QxMjMwIDY2N3Y5MUgyODZaIiBmaWxsPSIjZTdkY2NhIi8+PHJlY3QgeD0iMzc4IiB5PSI0NjIiIHdpZHRoPSIyODQiIGhlaWdodD0iMTU5IiByeD0iMzUiIGZpbGw9IiNlY2ViZTIiLz48cmVjdCB4PSI2OTUiIHk9IjQ2MiIgd2lkdGg9IjI5MCIgaGVpZ2h0PSIxNTkiIHJ4PSIzNSIgZmlsbD0iI2ZjZjZlZCIvPjxyZWN0IHg9Ijk3NSIgeT0iNDY4IiB3aWR0aD0iMTQxIiBoZWlnaHQ9IjE0OSIgcng9IjIwIiBmaWxsPSIjZTQ2NTU4IiB0cmFuc2Zvcm09InJvdGF0ZSgxMCAxMDQ1IDU0NSkiLz48cmVjdCB4PSI1MjIiIHk9IjQ3NiIgd2lkdGg9IjExMiIgaGVpZ2h0PSIxMzAiIHJ4PSIyMiIgZmlsbD0iI2YxY2U1NSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEzIDU3OCA1MzkpIi8+PHJlY3QgeD0iMTQzIiB5PSI2MDkiIHdpZHRoPSIxNjUiIGhlaWdodD0iMTQxIiByeD0iMTAiIGZpbGw9IiNlZmJhNDgiLz48cmVjdCB4PSIxMjc3IiB5PSI2MDkiIHdpZHRoPSIxNjUiIGhlaWdodD0iMTQxIiByeD0iMTAiIGZpbGw9IiNlZmJhNDgiLz48cmVjdCB4PSIxODAiIHk9IjU3NyIgd2lkdGg9IjgzIiBoZWlnaHQ9IjE3IiByeD0iOCIgZmlsbD0iIzE3MTcxNyIvPjxwYXRoIGQ9Ik0yMjMgNTc4di0xMzUiIHN0cm9rZT0iIzE3MTcxNyIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik0xNDUgNDQ0cTcyLTExMCAxNDYgMFoiIGZpbGw9IiNlNDY1NTgiLz48cmVjdCB4PSIxMzE5IiB5PSI1NzIiIHdpZHRoPSI4MyIgaGVpZ2h0PSIxNyIgcng9IjgiIGZpbGw9IiMxNzE3MTciLz48cGF0aCBkPSJNMTM1OSA1NzJ2LTEyOSIgc3Ryb2tlPSIjMTcxNzE3IiBzdHJva2Utd2lkdGg9IjEwIi8+PHBhdGggZD0iTTEyOTIgNDQ0cTcyLTExMCAxNDcgMFoiIGZpbGw9IiNlNDY1NTgiLz48cGF0aCBkPSJNMTgwIDc1MHY4MG05NS04MHY4ME0xMjk4IDc1MHY4MG0xMDctODB2ODAiIHN0cm9rZT0iIzdhNTEzZCIgc3Ryb2tlLXdpZHRoPSIxNyIvPjx0ZXh0IHg9IjY1IiB5PSI5NjMiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMzNTJmMmQiIGxldHRlci1zcGFjaW5nPSI3Ij5FRElUT1JJQUwgU0NFTkUgU1RVRFkgLyBCRURST09NPC90ZXh0Pjwvc3ZnPgo=" data-photo="https://images.pexels.com/photos/20604657/pexels-photo-20604657.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1800" data-fallback="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0id2FsbCIgeDI9IjEiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjYzZkMmNmIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYjViZmMwIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImZsb29yIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNjOTlmODciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNhNzcwNWQiLz48L2xpbmVhckdyYWRpZW50PjxmaWx0ZXIgaWQ9ImJsdXIiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjI3Ii8+PC9maWx0ZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjcyMSIgZmlsbD0idXJsKCN3YWxsKSIvPjxyZWN0IHk9IjcyMSIgd2lkdGg9IjE2MDAiIGhlaWdodD0iMjc5IiBmaWxsPSJ1cmwoI2Zsb29yKSIvPjxwYXRoIGQ9Ik0wIDcyMWgxNjAwIiBzdHJva2U9IiNiMmE1OWEiIHN0cm9rZS13aWR0aD0iMTIiLz48cmVjdCB4PSIxMzUiIHk9IjExMCIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIzODAiIGZpbGw9IiNlZWU5ZDgiIHN0cm9rZT0iI2ZhZjhlZSIgc3Ryb2tlLXdpZHRoPSIyMCIvPjxyZWN0IHg9IjE1OSIgeT0iMTMzIiB3aWR0aD0iMzEyIiBoZWlnaHQ9IjMzOCIgZmlsbD0iI2Y2YmU1ZCIvPjxwYXRoIGQ9Ik0xNzAgNDM2TDMwNSAxNzVsMTY1IDI2MCIgZmlsbD0iI2RhNjY2MSIvPjxwYXRoIGQ9Ik0xODAgMTgwaDI2MCIgc3Ryb2tlPSIjNmU5NWQ0IiBzdHJva2Utd2lkdGg9IjU1Ii8+PGNpcmNsZSBjeD0iMzUxIiBjeT0iMzE2IiByPSI2OSIgZmlsbD0iIzMxNTNhYSIvPjxyZWN0IHg9IjExNTAiIHk9IjExMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0NjAiIGZpbGw9IiNlZWU5ZGQiIHN0cm9rZT0iI2ZmZjllNiIgc3Ryb2tlLXdpZHRoPSIyMCIvPjxyZWN0IHg9IjExODAiIHk9IjEzOSIgd2lkdGg9IjIyMCIgaGVpZ2h0PSIzOTkiIGZpbGw9IiNhMmNiZDMiLz48cGF0aCBkPSJNMTI5MCAxMzl2Mzk5TTExODAgMzMzaDIyMCIgc3Ryb2tlPSIjZjlmOGU5IiBzdHJva2Utd2lkdGg9IjE0Ii8+PHBhdGggZD0iTTExODAgNDkwbDg1LTExMCAxMDAgNzAgMzUtNDl2MTMyaC0yMjBaIiBmaWxsPSIjYTNiOWFkIi8+PGVsbGlwc2UgY3g9Ijc3NyIgY3k9IjgzNiIgcng9IjU3MyIgcnk9IjkwIiBmaWxsPSIjNmM0YTQ0IiBvcGFjaXR5PSIuMjMiIGZpbHRlcj0idXJsKCNibHVyKSIvPjxyZWN0IHg9IjMzMiIgeT0iMzc1IiB3aWR0aD0iODYzIiBoZWlnaHQ9IjMxOCIgcng9IjQ0IiBmaWxsPSIjMzU1ZDZiIi8+PHJlY3QgeD0iMzY2IiB5PSI0MDgiIHdpZHRoPSI3OTUiIGhlaWdodD0iMjY2IiByeD0iMjYiIGZpbGw9IiM1MzgwOTIiLz48cmVjdCB4PSIyNTgiIHk9IjYxOCIgd2lkdGg9IjEwMDAiIGhlaWdodD0iMTg1IiByeD0iMTYiIGZpbGw9IiNiNGE4OWMiLz48cmVjdCB4PSIyODAiIHk9IjYwOCIgd2lkdGg9Ijk1NiIgaGVpZ2h0PSIxNTAiIHJ4PSIxNiIgZmlsbD0iI2ZmZmFmMCIvPjxwYXRoIGQ9Ik0yODYgNjY2UTU0MCA2MTIgNzgwIDY2N1QxMjMwIDY2N3Y5MUgyODZaIiBmaWxsPSIjZTdkY2NhIi8+PHJlY3QgeD0iMzc4IiB5PSI0NjIiIHdpZHRoPSIyODQiIGhlaWdodD0iMTU5IiByeD0iMzUiIGZpbGw9IiNlY2ViZTIiLz48cmVjdCB4PSI2OTUiIHk9IjQ2MiIgd2lkdGg9IjI5MCIgaGVpZ2h0PSIxNTkiIHJ4PSIzNSIgZmlsbD0iI2ZjZjZlZCIvPjxyZWN0IHg9Ijk3NSIgeT0iNDY4IiB3aWR0aD0iMTQxIiBoZWlnaHQ9IjE0OSIgcng9IjIwIiBmaWxsPSIjZTQ2NTU4IiB0cmFuc2Zvcm09InJvdGF0ZSgxMCAxMDQ1IDU0NSkiLz48cmVjdCB4PSI1MjIiIHk9IjQ3NiIgd2lkdGg9IjExMiIgaGVpZ2h0PSIxMzAiIHJ4PSIyMiIgZmlsbD0iI2YxY2U1NSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEzIDU3OCA1MzkpIi8+PHJlY3QgeD0iMTQzIiB5PSI2MDkiIHdpZHRoPSIxNjUiIGhlaWdodD0iMTQxIiByeD0iMTAiIGZpbGw9IiNlZmJhNDgiLz48cmVjdCB4PSIxMjc3IiB5PSI2MDkiIHdpZHRoPSIxNjUiIGhlaWdodD0iMTQxIiByeD0iMTAiIGZpbGw9IiNlZmJhNDgiLz48cmVjdCB4PSIxODAiIHk9IjU3NyIgd2lkdGg9IjgzIiBoZWlnaHQ9IjE3IiByeD0iOCIgZmlsbD0iIzE3MTcxNyIvPjxwYXRoIGQ9Ik0yMjMgNTc4di0xMzUiIHN0cm9rZT0iIzE3MTcxNyIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik0xNDUgNDQ0cTcyLTExMCAxNDYgMFoiIGZpbGw9IiNlNDY1NTgiLz48cmVjdCB4PSIxMzE5IiB5PSI1NzIiIHdpZHRoPSI4MyIgaGVpZ2h0PSIxNyIgcng9IjgiIGZpbGw9IiMxNzE3MTciLz48cGF0aCBkPSJNMTM1OSA1NzJ2LTEyOSIgc3Ryb2tlPSIjMTcxNzE3IiBzdHJva2Utd2lkdGg9IjEwIi8+PHBhdGggZD0iTTEyOTIgNDQ0cTcyLTExMCAxNDcgMFoiIGZpbGw9IiNlNDY1NTgiLz48cGF0aCBkPSJNMTgwIDc1MHY4MG05NS04MHY4ME0xMjk4IDc1MHY4MG0xMDctODB2ODAiIHN0cm9rZT0iIzdhNTEzZCIgc3Ryb2tlLXdpZHRoPSIxNyIvPjx0ZXh0IHg9IjY1IiB5PSI5NjMiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiMzNTJmMmQiIGxldHRlci1zcGFjaW5nPSI3Ij5FRElUT1JJQUwgU0NFTkUgU1RVRFkgLyBCRURST09NPC90ZXh0Pjwvc3ZnPgo=" alt="Visual temporal de bedroom" /></div>
+          <div class="room-tint"></div>
+          <div class="room-visual-caption">SCENE 02 / BEDROOM <span>VISUAL PLACEHOLDER · 3D NEXT</span></div>
+          <div class="room-floating intro-float" data-reveal="0.13" data-hide="0.51"><span>02 — DOMESTIC STORIES</span><strong>COMFORT<br>IS CONTEXT.</strong></div>
+          <button class="price-tag price-bedroom-1" data-product="bed" data-reveal="0.49" data-hide="0.98"><small>01 / BED FRAME</small><strong>$640</strong><span>SEE PRODUCT ↗</span></button>
+          <button class="price-tag price-bedroom-2" data-product="nightstand" data-reveal="0.63" data-hide="0.98"><small>02 / NIGHTSTAND</small><strong>$145</strong><span>SEE PRODUCT ↗</span></button>
+          <div class="room-corner-index">SC / 002</div>
+        </div>
+        <div class="room-editorial room-editorial-bedroom">
+          <div class="room-ed-top">02 / ROOM STUDY <span>BEDROOM</span></div>
+          <div class="room-copy-primary"><div class="room-overline">THE PERSONAL / CHAPTER 02</div><h2 data-kinetic data-kinetic-start="0.05" data-kinetic-end="0.56">BED<br>ROOM.</h2><p>Una habitación como colección, atmósfera e historia. Cada objeto tiene un lugar en ella.</p></div>
+          <div class="room-copy-secondary"><span class="room-ed-rule"></span><p>El catálogo explica lo que miramos, sin sacarnos de la composición.</p><div class="room-ed-num">02—03</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 / EDITORIAL INTERLUDE -->
+    <section class="story-section interlude interlude-blue" id="interlude-two" data-scene="interlude-two" data-scene-label="THE INTERFACE">
+      <div class="sticky-stage interlude-stage">
+        <div class="section-kicker light"><span>THE SPACE IS THE INTERFACE</span><span>EDITORIAL / 02</span></div>
+        <div class="interlude-big"><div data-kinetic data-kinetic-start="0.07" data-kinetic-end="0.68">SEE IT.</div><div data-kinetic data-kinetic-start="0.25" data-kinetic-end="0.79">KNOW IT.</div><div data-kinetic data-kinetic-start="0.44" data-kinetic-end="0.94">SHOP IT.</div></div>
+        <div class="interlude-lead">Textos, precios y descripciones vinculados al espacio. Sin mapas, sin pines convencionales y sin salir de la historia.</div>
+        <span class="interlude-number">07</span>
+      </div>
+    </section>
+
+    <!-- 08 / DINING -->
+    <section class="story-section room room-dining" id="dining" data-scene="dining" data-scene-label="DINING ROOM">
+      <div class="sticky-stage room-stage">
+        <div class="room-editorial room-editorial-dining">
+          <div class="room-ed-top">03 / ROOM STUDY <span>DINING</span></div>
+          <div class="room-copy-primary"><div class="room-overline">THE GATHERING / CHAPTER 03</div><h2 data-kinetic data-kinetic-start="0.05" data-kinetic-end="0.56">DINING<br>ROOM.</h2><p>Diseño, función y comercio conviven dentro de un mismo encuadre editorial.</p></div>
+          <div class="room-copy-secondary"><span class="room-ed-rule"></span><p>De la experiencia espacial al inventario: un catálogo que se entiende mirando.</p><div class="room-ed-num">03—03</div></div>
+        </div>
+        <div class="room-visual" data-room="dining">
+          <div class="room-image image-box"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0id2FsbCIgeDI9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZTJlNmQ4Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYjhjOGJhIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImZsb29yIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNjN2E1OGQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiNzgxNjkiLz48L2xpbmVhckdyYWRpZW50PjxmaWx0ZXIgaWQ9ImJsdXIiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjcwNSIgZmlsbD0idXJsKCN3YWxsKSIvPjxyZWN0IHk9IjcwNSIgd2lkdGg9IjE2MDAiIGhlaWdodD0iMjk1IiBmaWxsPSJ1cmwoI2Zsb29yKSIvPjxwYXRoIGQ9Ik0wIDcwNmgxNjAwIiBzdHJva2U9IiNiMWEzOTEiIHN0cm9rZS13aWR0aD0iMTQiLz48cmVjdCB4PSIxMTAiIHk9IjkwIiB3aWR0aD0iNDMwIiBoZWlnaHQ9IjQ4NSIgZmlsbD0iI2U0ZThkYiIgc3Ryb2tlPSIjZjhmNmViIiBzdHJva2Utd2lkdGg9IjI0Ii8+PHJlY3QgeD0iMTM0IiB5PSIxMTYiIHdpZHRoPSIzODAiIGhlaWdodD0iNDMzIiBmaWxsPSIjYmRkM2RjIi8+PHBhdGggZD0iTTMyNSAxMTZ2NDMzTTEzNCAzNTJoMzgwIiBzdHJva2U9IiNmNWY4ZWUiIHN0cm9rZS13aWR0aD0iMTYiLz48cGF0aCBkPSJNMTM0IDUwNXExMzAtMTAwIDI2MC01NXQxMjAtMzB2MTI5SDEzNFoiIGZpbGw9IiM3OGE1OTEiLz48cmVjdCB4PSIxMTA0IiB5PSIxNTQiIHdpZHRoPSIyNTMiIGhlaWdodD0iMzI1IiBmaWxsPSIjZTFjMjllIiBzdHJva2U9IiNmNmYwZTAiIHN0cm9rZS13aWR0aD0iMjQiLz48cGF0aCBkPSJNMTEyOSAxNzhoMjAzdjI3OWgtMjAzWiIgZmlsbD0iI2U4YmY3MyIvPjxwYXRoIGQ9Ik0xMTUwIDQyMHE0MC0yMjAgMTAwLTE4NXQ4MCAyMDAiIGZpbGw9IiNjOTU4NDYiLz48Y2lyY2xlIGN4PSIxMjcwIiBjeT0iMjcwIiByPSI2NCIgZmlsbD0iI2UxZGNiYSIvPjxlbGxpcHNlIGN4PSI3ODgiIGN5PSI4NDIiIHJ4PSI2MTAiIHJ5PSI5NyIgZmlsbD0iIzU5NDgzZiIgb3BhY2l0eT0iLjI2IiBmaWx0ZXI9InVybCgjYmx1cikiLz48cGF0aCBkPSJNMzkwIDc0Mmg4NTBsMTIwIDE1OEgyODBaIiBmaWxsPSIjZjZkOTVlIi8+PHBhdGggZD0iTTMyNSA4MzVoOTkwTTQyMCA4NzNoNzk1IiBzdHJva2U9IiNlMmI0NTMiIHN0cm9rZS13aWR0aD0iOSIvPjxnIGZpbGw9IiMyMzU5NmIiPjxyZWN0IHg9IjI0NSIgeT0iNTcwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjIyNSIgcng9IjcyIi8+PHJlY3QgeD0iMTE3MyIgeT0iNTY0IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjIzMSIgcng9IjcyIi8+PC9nPjxnIGZpbGw9IiMyMzU5NmIiIHN0cm9rZT0iIzFjNDU1NSIgc3Ryb2tlLXdpZHRoPSIxNSI+PHBhdGggZD0iTTI4NyA3MzBsLTM1IDE2Nm0xMjMtMTY2IDUwIDE2Nk0xMjE1IDczM2wtNDAgMTY2bTEyMC0xNjQgNDIgMTY0Ii8+PC9nPjxnIGZpbGw9IiNlYTYwNTEiPjxyZWN0IHg9IjQ0NSIgeT0iNTg0IiB3aWR0aD0iMTU2IiBoZWlnaHQ9IjIxNSIgcng9IjcwIi8+PHJlY3QgeD0iOTY3IiB5PSI1ODEiIHdpZHRoPSIxNTYiIGhlaWdodD0iMjE4IiByeD0iNzAiLz48L2c+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYTM0ZTQ1IiBzdHJva2Utd2lkdGg9IjE0Ij48cGF0aCBkPSJNNDc3IDczNWwtMzMgMTU4bTEyMi0xNTUgNDUgMTU4TTk5OSA3MzNsLTM0IDE2MW0xMjctMTU5IDQ1IDE2MCIvPjwvZz48ZWxsaXBzZSBjeD0iNzg0IiBjeT0iNjgwIiByeD0iMzkyIiByeT0iMTI1IiBmaWxsPSIjNjI0ODNhIiBvcGFjaXR5PSIuMjQiLz48ZWxsaXBzZSBjeD0iNzg1IiBjeT0iNjMzIiByeD0iMzgxIiByeT0iMTEyIiBmaWxsPSIjYTc3YjU1Ii8+PGVsbGlwc2UgY3g9Ijc4NSIgY3k9IjYwOSIgcng9IjM4OSIgcnk9IjEwMyIgZmlsbD0iI2RjYjE4YiIvPjxwYXRoIGQ9Ik01NDAgNjU2djIxME0xMDU0IDY1NnYyMTAiIHN0cm9rZT0iIzc0NGYzNyIgc3Ryb2tlLXdpZHRoPSIzNCIvPjxwYXRoIGQ9Ik03OTMgMHYyNTIiIHN0cm9rZT0iIzI5MmIyNyIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik02NTYgMjU5cTE0MC0yMjQgMjgwIDBaIiBmaWxsPSIjZjJjNzJiIi8+PGVsbGlwc2UgY3g9Ijc5NiIgY3k9IjI3MiIgcng9IjE0NSIgcnk9IjE2IiBmaWxsPSIjZTNhZTE2Ii8+PHBhdGggZD0iTTgxMCA1NjVjMC04NSA1Ni0xMDIgODAtMTM4IiBzdHJva2U9IiMzYjc1NTciIHN0cm9rZS13aWR0aD0iMTIiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNODY5IDQ2MnE3MC02OSA3My0yMWMtMiA0My03MCAzMS03MyAyMSIgZmlsbD0iIzZjOWI2NiIvPjxwYXRoIGQ9Ik04MDggNDkwcS03Ny01MC02Mi0xMnQ2MiAxMiIgZmlsbD0iIzZjOWI2NiIvPjxyZWN0IHg9Ijc1OSIgeT0iNTcwIiB3aWR0aD0iOTEiIGhlaWdodD0iODIiIHJ4PSI3IiBmaWxsPSIjZjVlYmUwIi8+PHRleHQgeD0iNjUiIHk9Ijk2NCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzM1MmIyMCIgbGV0dGVyLXNwYWNpbmc9IjciPkVESVRPUklBTCBTQ0VORSBTVFVEWSAvIERJTklORzwvdGV4dD48L3N2Zz4K" data-photo="https://images.pexels.com/photos/18869572/pexels-photo-18869572.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1800" data-fallback="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxNjAwIDEwMDAiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0id2FsbCIgeDI9IjAiIHkyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZTJlNmQ4Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYjhjOGJhIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImZsb29yIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNjN2E1OGQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiNzgxNjkiLz48L2xpbmVhckdyYWRpZW50PjxmaWx0ZXIgaWQ9ImJsdXIiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIyIi8+PC9maWx0ZXI+PC9kZWZzPjxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjcwNSIgZmlsbD0idXJsKCN3YWxsKSIvPjxyZWN0IHk9IjcwNSIgd2lkdGg9IjE2MDAiIGhlaWdodD0iMjk1IiBmaWxsPSJ1cmwoI2Zsb29yKSIvPjxwYXRoIGQ9Ik0wIDcwNmgxNjAwIiBzdHJva2U9IiNiMWEzOTEiIHN0cm9rZS13aWR0aD0iMTQiLz48cmVjdCB4PSIxMTAiIHk9IjkwIiB3aWR0aD0iNDMwIiBoZWlnaHQ9IjQ4NSIgZmlsbD0iI2U0ZThkYiIgc3Ryb2tlPSIjZjhmNmViIiBzdHJva2Utd2lkdGg9IjI0Ii8+PHJlY3QgeD0iMTM0IiB5PSIxMTYiIHdpZHRoPSIzODAiIGhlaWdodD0iNDMzIiBmaWxsPSIjYmRkM2RjIi8+PHBhdGggZD0iTTMyNSAxMTZ2NDMzTTEzNCAzNTJoMzgwIiBzdHJva2U9IiNmNWY4ZWUiIHN0cm9rZS13aWR0aD0iMTYiLz48cGF0aCBkPSJNMTM0IDUwNXExMzAtMTAwIDI2MC01NXQxMjAtMzB2MTI5SDEzNFoiIGZpbGw9IiM3OGE1OTEiLz48cmVjdCB4PSIxMTA0IiB5PSIxNTQiIHdpZHRoPSIyNTMiIGhlaWdodD0iMzI1IiBmaWxsPSIjZTFjMjllIiBzdHJva2U9IiNmNmYwZTAiIHN0cm9rZS13aWR0aD0iMjQiLz48cGF0aCBkPSJNMTEyOSAxNzhoMjAzdjI3OWgtMjAzWiIgZmlsbD0iI2U4YmY3MyIvPjxwYXRoIGQ9Ik0xMTUwIDQyMHE0MC0yMjAgMTAwLTE4NXQ4MCAyMDAiIGZpbGw9IiNjOTU4NDYiLz48Y2lyY2xlIGN4PSIxMjcwIiBjeT0iMjcwIiByPSI2NCIgZmlsbD0iI2UxZGNiYSIvPjxlbGxpcHNlIGN4PSI3ODgiIGN5PSI4NDIiIHJ4PSI2MTAiIHJ5PSI5NyIgZmlsbD0iIzU5NDgzZiIgb3BhY2l0eT0iLjI2IiBmaWx0ZXI9InVybCgjYmx1cikiLz48cGF0aCBkPSJNMzkwIDc0Mmg4NTBsMTIwIDE1OEgyODBaIiBmaWxsPSIjZjZkOTVlIi8+PHBhdGggZD0iTTMyNSA4MzVoOTkwTTQyMCA4NzNoNzk1IiBzdHJva2U9IiNlMmI0NTMiIHN0cm9rZS13aWR0aD0iOSIvPjxnIGZpbGw9IiMyMzU5NmIiPjxyZWN0IHg9IjI0NSIgeT0iNTcwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjIyNSIgcng9IjcyIi8+PHJlY3QgeD0iMTE3MyIgeT0iNTY0IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjIzMSIgcng9IjcyIi8+PC9nPjxnIGZpbGw9IiMyMzU5NmIiIHN0cm9rZT0iIzFjNDU1NSIgc3Ryb2tlLXdpZHRoPSIxNSI+PHBhdGggZD0iTTI4NyA3MzBsLTM1IDE2Nm0xMjMtMTY2IDUwIDE2Nk0xMjE1IDczM2wtNDAgMTY2bTEyMC0xNjQgNDIgMTY0Ii8+PC9nPjxnIGZpbGw9IiNlYTYwNTEiPjxyZWN0IHg9IjQ0NSIgeT0iNTg0IiB3aWR0aD0iMTU2IiBoZWlnaHQ9IjIxNSIgcng9IjcwIi8+PHJlY3QgeD0iOTY3IiB5PSI1ODEiIHdpZHRoPSIxNTYiIGhlaWdodD0iMjE4IiByeD0iNzAiLz48L2c+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYTM0ZTQ1IiBzdHJva2Utd2lkdGg9IjE0Ij48cGF0aCBkPSJNNDc3IDczNWwtMzMgMTU4bTEyMi0xNTUgNDUgMTU4TTk5OSA3MzNsLTM0IDE2MW0xMjctMTU5IDQ1IDE2MCIvPjwvZz48ZWxsaXBzZSBjeD0iNzg0IiBjeT0iNjgwIiByeD0iMzkyIiByeT0iMTI1IiBmaWxsPSIjNjI0ODNhIiBvcGFjaXR5PSIuMjQiLz48ZWxsaXBzZSBjeD0iNzg1IiBjeT0iNjMzIiByeD0iMzgxIiByeT0iMTEyIiBmaWxsPSIjYTc3YjU1Ii8+PGVsbGlwc2UgY3g9Ijc4NSIgY3k9IjYwOSIgcng9IjM4OSIgcnk9IjEwMyIgZmlsbD0iI2RjYjE4YiIvPjxwYXRoIGQ9Ik01NDAgNjU2djIxME0xMDU0IDY1NnYyMTAiIHN0cm9rZT0iIzc0NGYzNyIgc3Ryb2tlLXdpZHRoPSIzNCIvPjxwYXRoIGQ9Ik03OTMgMHYyNTIiIHN0cm9rZT0iIzI5MmIyNyIgc3Ryb2tlLXdpZHRoPSIxMCIvPjxwYXRoIGQ9Ik02NTYgMjU5cTE0MC0yMjQgMjgwIDBaIiBmaWxsPSIjZjJjNzJiIi8+PGVsbGlwc2UgY3g9Ijc5NiIgY3k9IjI3MiIgcng9IjE0NSIgcnk9IjE2IiBmaWxsPSIjZTNhZTE2Ii8+PHBhdGggZD0iTTgxMCA1NjVjMC04NSA1Ni0xMDIgODAtMTM4IiBzdHJva2U9IiMzYjc1NTciIHN0cm9rZS13aWR0aD0iMTIiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNODY5IDQ2MnE3MC02OSA3My0yMWMtMiA0My03MCAzMS03MyAyMSIgZmlsbD0iIzZjOWI2NiIvPjxwYXRoIGQ9Ik04MDggNDkwcS03Ny01MC02Mi0xMnQ2MiAxMiIgZmlsbD0iIzZjOWI2NiIvPjxyZWN0IHg9Ijc1OSIgeT0iNTcwIiB3aWR0aD0iOTEiIGhlaWdodD0iODIiIHJ4PSI3IiBmaWxsPSIjZjVlYmUwIi8+PHRleHQgeD0iNjUiIHk9Ijk2NCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iIzM1MmIyMCIgbGV0dGVyLXNwYWNpbmc9IjciPkVESVRPUklBTCBTQ0VORSBTVFVEWSAvIERJTklORzwvdGV4dD48L3N2Zz4K" alt="Visual temporal de dining room" /></div>
+          <div class="room-tint"></div>
+          <div class="room-visual-caption">SCENE 03 / DINING ROOM <span>VISUAL PLACEHOLDER · 3D NEXT</span></div>
+          <div class="room-floating intro-float" data-reveal="0.13" data-hide="0.50"><span>03 — CURATED COMMERCE</span><strong>THE ROOM<br>IS THE EDIT.</strong></div>
+          <button class="price-tag price-dining-1" data-product="dining-table" data-reveal="0.49" data-hide="0.98"><small>01 / DINING TABLE</small><strong>$420</strong><span>SEE PRODUCT ↗</span></button>
+          <button class="price-tag price-dining-2" data-product="chair" data-reveal="0.62" data-hide="0.98"><small>02 / DINING CHAIR</small><strong>$110</strong><span>SEE PRODUCT ↗</span></button>
+          <button class="price-tag price-dining-3" data-product="pendant" data-reveal="0.72" data-hide="0.98"><small>03 / PENDANT</small><strong>$180</strong><span>SEE PRODUCT ↗</span></button>
+          <div class="room-corner-index">SC / 003</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 / CLOSING -->
+    <section class="story-section closing" id="closing" data-scene="closing" data-scene-label="THE FUTURE">
+      <div class="sticky-stage closing-stage">
+        <div class="section-kicker"><span>ISSUE 001 / CONCLUSION</span><span>THE FUTURE OF COMMERCE</span></div>
+        <div class="closing-typography"><div data-kinetic data-kinetic-start="0.06" data-kinetic-end="0.54">SPACE</div><div data-kinetic data-kinetic-start="0.18" data-kinetic-end="0.71">BECOMES</div><div data-kinetic data-kinetic-start="0.32" data-kinetic-end="0.92">COMMERCE<span class="closing-period">.</span></div></div>
+        <div class="closing-bottom"><span>NOT JUST PRODUCTS IN 3D.<br>COMMERCE INSIDE A WORLD.</span><p>Una publicación que no solo explica qué es un catálogo espacial. Lo demuestra.</p><a href="#cover">READ AGAIN <span>↗</span></a></div>
+        <div class="closing-foot">SPATIAL CATALOG / ISSUE 001 <span>EDITORIAL INTERFACE PROTOTYPE — NO GAUSSIAN SPLAT YET</span></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Visual-only catalog interface: sample records, not commerce backend. -->
+  <div class="product-scrim" id="product-scrim" hidden></div>
+  <aside class="product-sheet" id="product-sheet" aria-hidden="true" aria-labelledby="product-heading">
+    <div class="product-sheet-header"><span>OBJECT / PRODUCT FILE</span><button type="button" id="close-product" aria-label="Cerrar ficha">✕</button></div>
+    <div class="product-sheet-main"><span id="product-code">SC—001</span><h2 id="product-heading">PRODUCT</h2><p id="product-description"></p><div id="product-price"></div><div class="product-specs"><span>CURATED OBJECT / EDITORIAL DEMO</span><span>PRICE FOR DISPLAY ONLY</span></div></div>
+    <div class="product-sheet-footer"><span>FUTURE / PRODUCT DATA INTEGRATION</span><button type="button" id="sheet-back">BACK TO ISSUE ↗</button></div>
+  </aside>
+  <!-- Zero-dependency scroll animation; GSAP / ScrollTrigger hooks prepared for integration. -->
+  <script>
+(() => {
+  'use strict';
+
+  const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
+  const easeOut = t => 1 - Math.pow(1 - clamp(t), 3);
+  const easeInOut = t => { t = clamp(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+  const chapters = [...document.querySelectorAll('.story-section')];
+  const kinetic = [];
+  const globalBar = document.getElementById('global-progress');
+  const pageIndicator = document.getElementById('page-indicator');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // CNSRC's individual-character idea, without needing a runtime SplitText license.
+  function splitKinetic(element) {
+    const accessibleLabel = element.innerText.replace(/\s+/g, ' ').trim();
+    element.setAttribute('aria-label', accessibleLabel);
+    let absoluteCharIndex = 0;
+    const glyphs = [];
+    function walk(node) {
+      [...node.childNodes].forEach(child => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const source = child.nodeValue || '';
+          if (!source.trim()) return;
+          const frag = document.createDocumentFragment();
+          source.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) {
+              const gap = document.createElement('span');
+              gap.className = 'k-sp'; gap.setAttribute('aria-hidden', 'true');
+              frag.append(gap);
+            } else {
+              const word = document.createElement('span');
+              word.className = 'k-word'; word.setAttribute('aria-hidden', 'true');
+              for (const letter of [...part]) {
+                const outer = document.createElement('span');
+                outer.className = 'k-char-wrap';
+                const inner = document.createElement('span');
+                inner.className = 'k-char'; inner.textContent = letter;
+                inner.dataset.letterIndex = absoluteCharIndex++;
+                outer.append(inner); word.append(outer); glyphs.push(inner);
+              }
+              frag.append(word);
+            }
+          });
+          child.replaceWith(frag);
+        } else if (child.nodeType === Node.ELEMENT_NODE && !child.classList.contains('closing-period')) {
+          walk(child);
+        }
+      });
+    }
+    walk(element);
+    kinetic.push({ element, glyphs, parent: element.closest('.story-section'), start: Number(element.dataset.kineticStart || .08), end: Number(element.dataset.kineticEnd || .7) });
+  }
+  document.querySelectorAll('[data-kinetic]').forEach(splitKinetic);
+
+  // The current issue deliberately starts with self-contained editorial scene stand-ins.
+  // Photography will be loaded asynchronously only on a hosted URL (never blocks the magazine).
+  if (location.protocol !== 'file:' && navigator.onLine) {
+    document.querySelectorAll('img[data-photo]').forEach(img => {
+      const photo = new Image();
+      photo.onload = () => { img.src = photo.src; };
+      photo.src = img.dataset.photo;
+    });
+  }
+  // Asset images are provisional. Local editorial SVGs preserve an offline fallback.
+  document.querySelectorAll('img[data-fallback]').forEach(img => {
+    img.addEventListener('error', () => {
+      if (img.dataset.hasFallback) return;
+      img.dataset.hasFallback = 'true'; img.src = img.dataset.fallback;
+    });
+  });
+
+  // Each glyph owns its entrance, hold, and departure; phrases overlap in time.
+  // A story track does not permanently occupy its viewport.
+  function updateKinetic(item, progress) {
+    if (reduced) {
+      item.glyphs.forEach(char => { char.style.opacity = '1'; char.style.transform = 'none'; });
+      return;
+    }
+    const count = item.glyphs.length;
+    const isRoom = item.parent?.classList.contains('room');
+    const entryEnd = isRoom ? Math.min(item.end, .30) : item.end;
+    const spread = isRoom ? .09 : .16;
+    const entryWindow = Math.max(.055, entryEnd - item.start - spread);
+    const exitStart = isRoom ? .37 : item.parent?.classList.contains('cover') ? .66 : Math.min(.96, Math.max(.71, item.end + .11));
+    item.glyphs.forEach((char, index) => {
+      const order = index / Math.max(1, count - 1);
+      const enter = easeOut((progress - (item.start + order * spread)) / entryWindow);
+      const exit = easeInOut((progress - (exitStart + (1 - order) * .06)) / .15);
+      const pitch = -76 * (1-enter) + 81 * exit;
+      const yaw = ((index % 5) - 2) * 6 * (1-enter) - ((index % 4) - 1.5) * 10 * exit;
+      const dy = 1.06 * (1-enter) - .84 * exit;
+      char.style.transform = `translate3d(0,${dy.toFixed(3)}em,0) rotateX(${pitch.toFixed(2)}deg) rotateY(${yaw.toFixed(2)}deg) scaleY(${(.74 + .26 * enter - .32 * exit).toFixed(3)})`;
+      char.style.opacity = String(clamp(enter * 1.8) * (1 - exit));
+    });
+  }
+
+  const progressMap = new Map(chapters.map(chapter => [chapter, 0]));
+  function revealElement(element, progress) {
+    const start = Number(element.dataset.reveal || 0);
+    const hide = Number(element.dataset.hide || 1);
+    const inT = easeOut((progress - start) / .10);
+    const outT = 1 - easeInOut((progress - (hide - .08)) / .08);
+    const alpha = reduced ? Number(progress >= start && progress <= hide) : clamp(inT * outT);
+    element.style.opacity = alpha.toFixed(3);
+    element.style.transform = `translate3d(0, ${((1 - inT) * 22 - (1 - outT) * 14).toFixed(1)}px, 0)`;
+    element.style.pointerEvents = alpha > .9 ? 'auto' : 'none';
+  }
+
+  function updateChapter(chapter, p) {
+    progressMap.set(chapter, p);
+    const photo = chapter.querySelector('.room-image img, .cover-photo img');
+    if (photo && !reduced) {
+      const scale = chapter.classList.contains('cover') ? 1.06 + p * .13 : 1.02 + easeInOut((p - .31) / .48) * .22;
+      const tx = chapter.classList.contains('cover') ? -p * 2.5 : -easeInOut((p - .31) / .48) * 5;
+      photo.style.transform = `translate3d(${tx.toFixed(2)}%, 0, 0) scale(${scale.toFixed(3)})`;
+    }
+    chapter.querySelectorAll('[data-reveal]').forEach(el => revealElement(el, p));
+    const coverTitle = chapter.querySelector('.cover-title');
+    if (coverTitle) {
+      const leave = easeInOut((p - .60) / .26);
+      coverTitle.style.opacity = String(1 - leave);
+      coverTitle.style.transform = `translateY(${-34 * leave}px)`;
+    }
+    const roomPrimary = chapter.querySelector('.room-copy-primary p');
+    const roomSecondary = chapter.querySelector('.room-copy-secondary');
+    const editorial = chapter.querySelector('.room-editorial');
+    const captions = chapter.querySelectorAll('.room-visual-caption,.room-corner-index');
+    if (roomPrimary && roomSecondary && editorial) {
+      // Independent overlapping tracks: copy A -> copy B -> image takes the full viewport.
+      const aIn = easeOut((p - .04) / .09);
+      const aOut = easeInOut((p - .30) / .11);
+      roomPrimary.style.opacity = String(aIn * (1 - aOut));
+      roomPrimary.style.transform = `translateY(${(25 * (1-aIn) - 16 * aOut).toFixed(1)}px)`;
+      const bIn = easeOut((p - .33) / .13);
+      const bOut = easeInOut((p - .57) / .11);
+      roomSecondary.style.opacity = String(bIn * (1 - bOut));
+      roomSecondary.style.transform = `translateY(${(28 * (1-bIn) - 18 * bOut).toFixed(1)}px)`;
+      const release = easeInOut((p - .55) / .13);
+      const sign = chapter.classList.contains('room-bedroom') ? 1 : -1;
+      editorial.style.opacity = String(1 - release);
+      editorial.style.transform = `translate3d(${(sign * release * 102).toFixed(2)}%,0,0)`;
+      editorial.style.pointerEvents = release > .95 ? 'none' : 'auto';
+      const captionAlpha = 1 - easeInOut((p - .43) / .14);
+      captions.forEach(el => { el.style.opacity = String(captionAlpha); });
+    }
+  }
+
+  function progressFor(chapter) {
+    const rect = chapter.getBoundingClientRect();
+    const available = Math.max(1, rect.height - window.innerHeight);
+    return clamp(-rect.top / available);
+  }
+
+  let scheduled = false;
+  function render() {
+    scheduled = false;
+    let currentIndex = 0;
+    let bestDistance = Infinity;
+    chapters.forEach((chapter, index) => {
+      const rect = chapter.getBoundingClientRect();
+      const local = progressFor(chapter);
+      updateChapter(chapter, local);
+      const midpointDistance = Math.abs((rect.top + rect.bottom) / 2 - window.innerHeight / 2);
+      if (midpointDistance < bestDistance) { bestDistance = midpointDistance; currentIndex = index; }
+    });
+    kinetic.forEach(item => updateKinetic(item, progressMap.get(item.parent) || 0));
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    const globalProgress = clamp(scrollY / maxScroll);
+    globalBar.style.width = `${(globalProgress * 100).toFixed(2)}%`;
+    pageIndicator.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(chapters.length).padStart(2, '0')}`;
+    document.documentElement.style.setProperty('--page-progress', String(globalProgress));
+  }
+  function requestRender() { if (!scheduled) { scheduled = true; requestAnimationFrame(render); } }
+  addEventListener('scroll', requestRender, { passive: true });
+  addEventListener('resize', requestRender, { passive: true });
+  addEventListener('orientationchange', requestRender);
+  document.querySelectorAll('img[data-fallback]').forEach(img => img.addEventListener('load', requestRender));
+
+  // When GSAP is available, ScrollTrigger drives the frame update. Vanilla rAF
+  // remains the zero-dependency fallback for local previews and offline files.
+  if (window.gsap && window.ScrollTrigger) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+    window.ScrollTrigger.create({
+      trigger: document.getElementById('magazine'),
+      start: 'top top', end: 'bottom bottom',
+      onUpdate: requestRender,
+      onRefresh: requestRender
+    });
+  }
+
+  const products = {
+    'sofa': { code: 'LR—001', name: 'MODULAR SOFA', price: '$890', description: 'Sofá modular de tres plazas. Una pieza central para construir el espacio social. Tapizado textil y estructura de líneas suaves.' },
+    'lamp': { code: 'LR—002', name: 'FLOOR LAMP', price: '$129', description: 'Lámpara de pie de luz cálida. Perfil escultórico, pensada para introducir una segunda escala de iluminación.' },
+    'table': { code: 'LR—003', name: 'LOW TABLE', price: '$240', description: 'Mesa baja de centro con proporciones generosas. Superficie práctica y acento material dentro del conjunto.' },
+    'bed': { code: 'BR—001', name: 'BED FRAME', price: '$640', description: 'Estructura de cama contemporánea, concebida como centro visual de la habitación.' },
+    'nightstand': { code: 'BR—002', name: 'NIGHTSTAND', price: '$145', description: 'Mesa de noche compacta, con espacio de apoyo y una silueta geométrica sencilla.' },
+    'dining-table': { code: 'DR—001', name: 'DINING TABLE', price: '$420', description: 'Mesa para comedor de proporciones equilibradas, pensada para reunir objetos y personas.' },
+    'chair': { code: 'DR—002', name: 'DINING CHAIR', price: '$110', description: 'Silla de comedor de perfil limpio y asiento cómodo. Una pieza repetible dentro del conjunto.' },
+    'pendant': { code: 'DR—003', name: 'PENDANT LAMP', price: '$180', description: 'Luminaria suspendida para iluminar la mesa y definir visualmente el espacio de reunión.' }
+  };
+  const sheet = document.getElementById('product-sheet');
+  const scrim = document.getElementById('product-scrim');
+  let oldFocus = null;
+  function openProduct(id, button) {
+    const data = products[id]; if (!data) return;
+    oldFocus = button;
+    document.getElementById('product-code').textContent = data.code;
+    document.getElementById('product-heading').textContent = data.name;
+    document.getElementById('product-description').textContent = data.description;
+    document.getElementById('product-price').textContent = data.price;
+    scrim.hidden = false; sheet.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    sheet.setAttribute('aria-hidden', 'false');
+    document.getElementById('close-product').focus();
+  }
+  function closeProduct() {
+    sheet.classList.remove('is-open'); sheet.setAttribute('aria-hidden', 'true');
+    scrim.hidden = true; document.body.style.overflow = '';
+    if (oldFocus && oldFocus.isConnected) oldFocus.focus({ preventScroll: true });
+  }
+  document.querySelectorAll('button[data-product]').forEach(button => button.addEventListener('click', () => openProduct(button.dataset.product, button)));
+  scrim.addEventListener('click', closeProduct);
+  document.getElementById('close-product').addEventListener('click', closeProduct);
+  document.getElementById('sheet-back').addEventListener('click', closeProduct);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && sheet.classList.contains('is-open')) closeProduct(); });
+
+  requestAnimationFrame(() => requestAnimationFrame(render));
+})();
+
+</script>
+</body>
+</html>
